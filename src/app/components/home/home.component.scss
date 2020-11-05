@@ -1,0 +1,239 @@
+.smallHeight{
+    height: 130px;
+}
+.bigHeight{
+    height: 100%;
+}
+
+.slide{
+    height: 100%;
+    overflow: hidden;
+}
+
+.btn-theme{
+    padding: 0.4rem 1.8rem;
+    font-size: 1rem;
+}
+.carousel-caption{
+    position: relative !important;
+    left: 0 !important;
+    top: 20px;
+    bottom: unset;
+}
+.small-text{
+    font-size: 0.7rem;
+    color: #7d7d7d;
+    font-weight: 500;
+}
+
+.home .heading{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(204, 204, 204, 0.5);
+
+}
+.home .heading .pri{
+    font-size: 1.5rem;
+    padding-bottom: 0.4rem;
+    span{
+        margin-left: 1rem;
+        font-size: 0.8rem;
+        color: #687477;
+    }
+}
+.myBtn{
+    padding: 0.7rem 1.8rem;
+    border-radius: .6rem;
+    outline: none;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    font-size: 1rem;
+    margin-right: .5rem;
+}
+.primary{
+    border: 1px solid rgba(0, 170, 216);
+    background: rgba(0, 170, 216);
+    color: white;
+}
+.primary:hover{
+    border: 1px solid rgba(0, 138, 177);
+    background: rgb(0, 138, 177);
+    color: white;
+}
+.secondary{
+    border: 1px solid #f0f0f0;
+    background: #f0f0f0;
+    color: #7d7d7d;
+}
+.secondary:hover{
+    border: 1px solid #e6e6e6;
+    background: #e6e6e6;
+    color: #616161;
+}
+
+.card{
+    height: 100%;
+    box-shadow: 0 0rem 0.8rem rgba(0, 0, 0, 0.09) !important; 
+}
+.home{
+    padding: 0 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.homeGrid{
+    display: grid;
+}
+
+table{
+    thead{
+        th{
+            padding: .5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+    }
+    tbody{
+        td{
+            padding: .5rem;
+            font-size: 0.8rem;
+            vertical-align: middle;
+        }
+    }
+}
+
+
+.topGrid{
+    grid-template-columns: 2fr 1fr;
+    column-gap: 1.5rem;
+    row-gap: 1.5rem;
+    .subheader,.footer{
+        padding: 1.5rem;
+    }
+    
+    .subheader{
+        display: flex;
+        justify-content: space-between;
+        .text{
+            font-size: 0.7rem;
+            color: #f5eaea;
+            font-weight: 500;
+        }
+    }
+    .header{
+        display: flex;
+        justify-content: space-between;
+        padding: 0.2rem 1.5rem 0.5rem 1.5rem;
+        margin-top: -0.5rem;
+        .text{
+            display: flex;
+            height: 100%;
+            span{
+                font-size: 1.2rem;
+                color: #7d7d7d;
+                padding-right: 0.2rem;
+                
+            }
+            font-size: 1.5rem;
+            font-weight: 700;
+            .title{
+                font-size: 1.5rem;
+                font-weight: 500;
+                color: #089eae;
+            }
+            .logo{
+                width: 40px;
+                background: #f0f0f0;
+                border-radius: 2rem;
+                padding: 10px;
+                display: flex;
+                height: 40px;
+            }
+            .subtitle{
+                font-size: 0.7rem;
+                font-weight: 700;
+                color: #7d7d7d;
+            }
+        }
+
+    }
+    .footer{
+        
+    }
+}
+.middleGrid{
+    margin-top: 1.5rem;
+    column-gap: 1.5rem;
+    row-gap: 1.5rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    .header{
+        padding: 1.5rem; 
+         display: flex;
+         justify-content: space-between;
+         .text{
+            
+             .title{
+                 font-size: 1.1rem;
+                 font-weight: 400;
+             }
+             .subtitle{
+                 font-size: 2rem;
+                 font-weight: 700;
+                 color: #7d7d7d;
+             }
+         }
+         .logo{
+             width: 50px;
+         }
+     }
+     .footer{
+         position: absolute;
+         padding: 1.5rem;
+         display: flex;
+         bottom: 0;
+         justify-content: space-between;
+         .text{
+             font-size: 2rem;
+             font-weight: 500;
+             span{
+                font-size: 1.2rem;
+                color: #7d7d7d;
+                padding-right: 0.2rem;
+            }
+         }
+     }
+}
+.bottomGrid{
+    margin-top: 1.5rem;
+    column-gap: 1.5rem;
+    row-gap: 1.5rem;
+    grid-template-columns: 1fr 1fr;
+    .header{
+        display: flex;
+        justify-content: space-between;
+        padding: 1.5rem;
+        .text{
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+    }
+
+    .body{
+        padding: 0 1.5rem 1.5rem 1.5rem;
+    }
+}
+
+.plates{
+    background: white;
+    border-radius: 6px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 4px #8882 !important; 
+    
+}
+
+@media (min-width: 1500px){
+    .home{
+        padding: 1.5rem 4rem;
+    }
+}

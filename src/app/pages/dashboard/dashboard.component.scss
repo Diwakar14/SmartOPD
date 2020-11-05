@@ -1,0 +1,15 @@
+.dashboard{
+    
+    display: flex;
+    .sidebar{
+        transition: .2s all ease;
+    }
+    .main{
+        width: 100%;
+        max-height: 100vh;
+        overflow-y: auto;
+        transition: .2s all ease;
+        background: #faffff;
+    }
+    
+}

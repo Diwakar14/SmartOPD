@@ -1,0 +1,36 @@
+<div class="faqs-doc">
+
+    <div class="heading border-bottom mb-2">
+        <div class="primary">
+            Doctor FAQs
+            <span>Dashboard / Doctor FAQs</span>
+        </div>
+    </div>
+    <div class="content">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="title mb-2">
+            All Topics
+          </div>
+          <ul class="topics-list">
+              <li class="topics-list-items" *ngFor="let topic of topics; index as id" (click)="showFaq(id)">
+                  {{topic.title}}
+              </li>  
+          </ul>
+        </div>
+        <div class="col-md-9">
+          <div class="title mb-2">
+            <span *ngFor="let bred of bread; last as islast; index as id" (click)="showFaq(id)">
+              {{islast == true? bred: bred + ' >'}}
+            </span>
+          </div>
+          <br>
+          <div class="f-card" *ngFor="let faq of faqs.faqs; index as i">
+            <span (click)="showAnswer(faq)">{{faq.question}}</span>
+            <br>
+            <p>{{faq.answer}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

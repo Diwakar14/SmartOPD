@@ -1,0 +1,305 @@
+<div class="notification">
+    <div class="heading">
+        <div class="primary">
+            Notification
+            <span>Dashboard / Notification</span>
+        </div>
+    </div>
+    <br>
+    <div class="main">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" 
+                aria-controls="pills-home" aria-selected="true">General Notification</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" 
+                aria-controls="pills-profile" aria-selected="false">Doctor Notification</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" 
+                aria-controls="pills-contact" aria-selected="false">Patient Notification</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="pills-department-tab" data-toggle="pill" href="#pills-department" role="tab" 
+                aria-controls="pills-department" aria-selected="false">Department Notification</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="head">
+                    General Notification
+                </div>
+                <form #gen="ngForm" (ngSubmit)="generalNot(gen)">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-3">
+                            <div class="uploadFile">
+                                <div class="file-wrapper" id="image-preview1">
+                                    <label id="image-label1">Upload Image</label>
+                                    <input type="file" id="image-upload1" class="photo"
+                                     (change)="fileChangeEvent($event)" #photo1 name="photo" accept="image/jpeg, image/png" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-5">
+                            <div class="card">
+                                <div class="form-group">
+                                    <label for="">Title: *</label>
+                                    <input type="text" class="myForm-control" required placeholder="Enter Your title" autocomplete="off" name="title" [(ngModel)]="general.title">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Message: *</label>
+                                    <textarea class="myForm-control" maxlength="150" required rows="6" placeholder="Enter Your Message" name="body" [(ngModel)]="general.body" ></textarea>
+                                    <small class="d-block text-right">{{general.body.length}}/150 Characters</small>
+                                </div>
+                            </div>
+                        
+                            <div class="form-group">
+                                <button class="btn btn-theme" [disabled]="!gen.valid || general.submit">
+                                    Submit
+                                    <img src="../../../assets/icons/ring.svg" *ngIf="general.submit" alt="loading..." width="20px">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="head">
+                    Doctor Notification
+                </div>
+                <form #doctor="ngForm" (ngSubmit)="doctorNot(doctor)">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="uploadFile">
+                                <div class="file-wrapper" id="image-preview2">
+                                    <label id="image-label2">Upload Image</label>
+                                    <input type="file" id="image-upload2" class="photo"
+                                     (change)="fileChangeEvent($event)" #photo2 name="photo" accept="image/jpeg, image/png" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-5">
+                            <div class="card">
+                                <label for="">Recipient</label>
+                                <div class="form-group" >
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="doctorNot" [(ngModel)]="docNotification.all" id="doctorNot" value="All Doctors">
+                                        <label class="form-check-label" for="doctorNot">All Doctors</label>
+                                      </div>
+                                      <div class="form-check form-check-inline ml-3">
+                                        <input class="form-check-input" type="radio" name="doctorNot" [(ngModel)]="docNotification.all" id="DocNotific" value="Specific Doctor">
+                                        <label class="form-check-label" for="DocNotific">Specific Doctor</label>
+                                      </div>
+                                </div>
+                                <div class="form-group" *ngIf="docNotification.all == 'Specific Doctor'">
+                                    <div class="inputBox mb-2">
+                                        <input type="search" (keyup)="searchDoc($event)" class="searchInput" placeholder="Search doctor by name" />
+                                        <button class="search">
+                                          <span class="material-icons" *ngIf="!loadingSearchDataDoc">
+                                            search
+                                          </span>
+                                          <span *ngIf="loadingSearchDataDoc">
+                                            <img src="../../../assets/icons/ring.svg" width="20px" alt="">
+                                          </span>
+                                        </button>
+                                    </div>
+                                    <div class="output-search shadow-sm">
+                                        <ul>
+                                            <ng-template ngFor let-dept [ngForOf]="filteredDoctors" let-i="index">
+                                                <li *ngFor="let doc of dept.doctors" (click)="addDoc(doc, i)">
+                                                    {{ doc.doctor.name }}
+                                                </li>
+                                            </ng-template>
+                                        </ul>
+                                    </div>
+                                    <div class="chip-group" *ngIf="Doctors.length!=0">
+                                        <div class="chip" *ngFor="let docChip of Doctors; index as i">
+                                            {{docChip.doctor.name}}
+                                            <span class="material-icons del" (click)="deleteChipDoc(i)">clear</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="form-group">
+                                    <label for="">Title: *</label>
+                                    <input type="text" class="myForm-control" required placeholder="Enter Your title" name="doctitle" autocomplete="off" [(ngModel)]="docNotification.title">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Message: *</label>
+                                    <textarea class="myForm-control" rows="6" required placeholder="Enter Your Message" name="bodydoc" [(ngModel)]="docNotification.body" ></textarea>
+                                    <small class="d-block text-right">{{docNotification.body.length}}/150 Characters</small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-theme ml-auto" [disabled]="!doctor.valid || docNotification.submit" >
+                                    Submit
+                                    <img src="../../../assets/icons/ring.svg" *ngIf="docNotification.submit" alt="loading..." width="20px">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                <div class="head">
+                    Patient Notification
+                </div>
+                <form #patient="ngForm" (ngSubmit)="patientNot(patient)">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="uploadFile">
+                                <div class="file-wrapper" id="image-preview3">
+                                    <label id="image-label3">Upload Image</label>
+                                    <input type="file" id="image-upload3" class="photo"
+                                     (change)="fileChangeEvent($event)" #photo3 name="photo" accept="image/jpeg, image/png" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-5">
+                            <div class="card">
+                                <label for="">Recipient</label>
+
+                                <div class="form-group">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="Patients" [(ngModel)]="patNotification.all" id="docall" value="All Patients">
+                                        <label class="form-check-label" for="docall">All Patients</label>
+                                      </div>
+                                      <div class="form-check form-check-inline ml-3">
+                                        <input class="form-check-input" type="radio" name="Patients" id="docSpecific" [(ngModel)]="patNotification.all" value="Specific Patient">
+                                        <label class="form-check-label" for="docSpecific">Specific Patient</label>
+                                      </div>
+                                </div>
+                                <div class="form-group" *ngIf="patNotification.all == 'Specific Patient'">
+                                    <div class="inputBox">
+                                        <input type="search" (keyup)="searchPat($event)" class="searchInput" placeholder="Search by name, designation, department" />
+                                        <button class="search">
+                                          <span class="material-icons" *ngIf="!loadingSearchDataPat">
+                                          search
+                                          </span>
+                                          <span *ngIf="loadingSearchDataPat">
+                                            <img src="../../../assets/icons/ring.svg" width="20px" alt="">
+                                          </span>
+                                        </button>
+                                    </div>
+                                    <div class="output-search shadow-sm">
+                                        <ul>
+                                            <li *ngFor="let patient of filteredPatients; index as i" (click)="addPat(patient, i)">
+                                                {{ patient.name }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="chip-group mt-2">
+                                        <div class="chip" *ngFor="let patChip of Patients; index as i">
+                                            {{patChip.name}}
+                                            <span class="material-icons del" (click)="deleteChipPat(i)">clear</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="form-group">
+                                    <label for="">Title: *</label>
+                                    <input type="text" class="myForm-control" required placeholder="Enter Your title" autocomplete="off" name="pat" [(ngModel)]="patNotification.title">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Message: *</label>
+                                    <textarea class="myForm-control" rows="6" required placeholder="Enter Your Message" name="bodyPat" [(ngModel)]="patNotification.body"></textarea>
+                                    <small class="d-block text-right"> {{patNotification.body.length}}/150 Characters</small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-theme" [disabled]="!patient.valid || patNotification.submit">
+                                    Submit
+                                    <img src="../../../assets/icons/ring.svg" *ngIf="patNotification.submit" alt="loading..." width="20px">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    
+                </form>
+            </div>
+            <div class="tab-pane fade" id="pills-department" role="tabpanel" aria-labelledby="pills-department-tab">
+                <div class="head">
+                    Department Notification
+                </div>
+                <form #department="ngForm" (ngSubmit)="departmentNot(department)">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-3">
+                            <div class="uploadFile">
+                                <div class="file-wrapper" id="image-preview4">
+                                    <label id="image-label4">Upload Image</label>
+                                    <input type="file" id="image-upload4" class="photo"
+                                     (change)="fileChangeEvent($event)" #photo4 name="photo" accept="image/jpeg, image/png" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-5">
+                            <div class="card">
+                                <label for="">Recipient</label>
+
+                                <div class="form-group">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" [(ngModel)]="deptNotification.all" id="allDept" value="All Departments">
+                                        <label class="form-check-label" for="allDept">All Departments</label>
+                                      </div>
+                                      <div class="form-check form-check-inline ml-3">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" [(ngModel)]="deptNotification.all" id="speciDept" value="Specific Department">
+                                        <label class="form-check-label" for="speciDept">Specific Department</label>
+                                      </div>
+                                </div>
+                                <div class="form-group" *ngIf="deptNotification.all == 'Specific Department'">
+                                    <div class="inputBox">
+                                        <input type="search" (keyup)="searchDept($event)" class="searchInput" placeholder="Search by name, designation, department" />
+                                        <button class="search">
+                                          <span class="material-icons" *ngIf="!loadingSearchDataDept">
+                                          search
+                                          </span>
+                                          <span *ngIf="loadingSearchDataDept">
+                                            <img src="../../../assets/icons/ring.svg" width="20px" alt="">
+                                          </span>
+                                        </button>
+                                    </div>
+                                    <div class="output-search shadow-sm">
+                                        <ul>
+                                            <li *ngFor="let dept of filteredDepartments; index as i" (click)="addDepartment(dept, i)">
+                                                {{ dept.name }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="chip-group mt-2">
+                                        <div class="chip" *ngFor="let dept of Departments; index as i">
+                                            {{dept.name}}
+                                            <span class="material-icons del" (click)="deleteChipDepartment(i)">clear</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="form-group">
+                                    <label for="">Title: *</label>
+                                    <input type="text" class="myForm-control" required placeholder="Enter Your title" name="ddfd" [(ngModel)]="deptNotification.title" >
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Message: *</label>
+                                    <textarea class="myForm-control" rows="6" required placeholder="Enter Your Message" name="sdsds" [(ngModel)]="deptNotification.body" ></textarea>
+                                    <small class="d-block text-right">{{deptNotification.body.length}}/150 Characters</small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-theme" [disabled]="!department.valid || deptNotification.submit">
+                                    Submit
+                                    <img src="../../../assets/icons/ring.svg" *ngIf="deptNotification.submit" alt="loading..." width="20px">
+                                    
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

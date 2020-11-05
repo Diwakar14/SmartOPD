@@ -1,0 +1,78 @@
+
+<div class="card addStaff p-0">
+    <div class="card-title border-bottom p-2 d-flex">
+        {{update==false?'Add Staff':'Update Staff'}}
+        <span class="ml-auto close" (click)="close_pat()">
+            <div class="material-icons">clear</div>
+        </span>
+    </div>
+    
+    <!-- <div class="uploadImage p-3" *ngIf="!update">
+        <div class="file-wrapper" id="image-preview">
+            <input type="file" id="image-upload" class="photo"
+                (change)="fileChangeEvent($event)" #photo name="photo" accept="image/jpeg, image/png" />
+        </div>
+    </div>
+    <div class="uploadBtn mt-2 text-center" *ngIf="!update">
+        <span class="sub-text ">Only png,jpeg and jpg is allowed</span>
+    </div> -->
+
+    <form #f="ngForm" (ngSubmit)="addStaff(f)" class="px-3 pt-1 pb-3">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="">Name *</label>
+                    <input type="text" [(ngModel)]="staff.name" class="form-control" name="name" required>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="">Username *</label>
+                    <input type="text" [(ngModel)]="staff.username" class="form-control" name="username" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="">Role *</label>
+                    <select name="roll" class="form-control" [(ngModel)]="staff.role">
+                        <option value="Admin">Admin</option>
+                        <option value="Operator">Operator</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="">Phone Number</label>
+                    <input type="text" minlength="10" maxlength="10" [(ngModel)]="staff.phone" #phone="ngModel" (change)="checkUniqueness(phone)" class="form-control" name="phone">
+                    <small *ngIf="phoneUniqueErrors" >Checking...</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 col-lg-6">
+                <label for="">Email</label>
+                <input type="text" [(ngModel)]="staff.email" class="form-control" name="email" >
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <label for="">{{update == true? 'New Password' : 'Password *'}}</label>
+                <input type="password" [(ngModel)]="staff.password" class="form-control" name="password" [required]="!update">
+            </div>
+        </div>
+
+        <div mat-dialog-actions class="mt-4">
+            <button type="button" class="btn btn-theme-outline mr-2" (click)="disableStaff()" *ngIf="update">
+                Disable Staff
+                <img src="../../../assets/icons/ring.svg" *ngIf="disabled" alt="img" width="20px">
+            </button>
+            <button type="submit" class="btn btn-theme-sm" [disabled]="(!f.valid) || loading" cdkFocusInitial>
+                {{update==false?'Add Staff':'Update Staff'}}
+                <img src="../../../assets/icons/ring.svg" *ngIf="loading" alt="img" width="20px">
+            </button>
+        </div>
+    </form>
+
+</div>
+

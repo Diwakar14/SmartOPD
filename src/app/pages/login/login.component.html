@@ -1,0 +1,93 @@
+<section id="login-area">
+    <img src="../../../assets/img/login/login-bg-1.png" style="position:absolute;top:0;left: 0;z-index:0;opacity: 0.5">
+    <div id="login-card">
+        <img src="../../../assets/img/login/leaves.png" class="login-image">
+        <div id="form-area" *ngIf="!forgotPassPanel">
+            <h1>Sign In</h1>
+            <span class="sub-text">Welcome to the admin panel of SmartOPD</span>
+            <form #f="ngForm" (ngSubmit)="loginWithEmail(f)" *ngIf="!forgotPassPanel">
+                <div class="form-group">
+                    <label for="username">Username / Email</label>
+                    <input type="text" name="username" id="username" [(ngModel)]="login.username" 
+                    class="form-control" autocomplete="off" placeholder="eg. John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password / OTP</label>
+                    <input type="password" name="password" id="password" [(ngModel)]="login.password" 
+                    class="form-control" autocomplete="off" placeholder="*******" required>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-7">
+                        <button type="submit" class="d-flex" [disabled]="!f.valid || submit" class="btn btn-theme">
+                            Sign In
+                            <img src="../../../assets/icons/ring.svg" style="width: 15px;" class="ml-2 animte_animated animate__fadeInLeft" *ngIf="submit"  alt="">
+                        </button>
+                    </div>
+                    <!-- <div class="col-md-5 text-right">
+                        <a name="" id="" class="sub-text" href="#" role="button">Forgot Password?</a>
+                    </div> -->
+                </div>
+            </form>
+            <br>
+            
+
+        </div>
+        <div id="form-area" *ngIf="forgotPassPanel">
+            <h2>Forgot Password</h2>
+            <span class="sub-text">Welcome to the admin panel of SmartOPD</span>
+            <form class="animate__animated" *ngIf="!requestotpPanel">
+                <div class="form-group">
+                    <label for="username">Username / Email / Phone Number</label>
+                    <input type="text" name="username" id="username" [(ngModel)]="login.username" 
+                    class="form-control" autocomplete="off" placeholder="eg. John Doe" required>
+                </div>
+                <button type="submit" class="d-flex" class="btn btn-theme" (click)="requestOTP()">
+                    Request OTP
+                    <img src="../../../assets/icons/ring.svg" style="width: 15px;" class="ml-2 animte_animated animate__fadeInLeft" *ngIf="submit"  alt="">
+                </button>
+            </form>
+
+            <form class="animate__animated animate__bounce" *ngIf="requestotpPanel">
+                <div class="form-group">
+                    <label for="username">Verify OTP</label>
+                    <input type="text" name="username" id="username" [(ngModel)]="login.username" 
+                    class="form-control" autocomplete="off" placeholder="eg. John Doe" required>
+                </div>
+                <button type="submit" class="d-flex" class="btn btn-theme" (click)="verifyOtp()">
+                    Verify OTP
+                    <img src="../../../assets/icons/ring.svg" style="width: 15px;" class="ml-2 animte_animated animate__fadeInLeft" *ngIf="submit"  alt="">
+                </button>
+            </form>
+
+            <form class="animate__animated animate__bounce" *ngIf="newPassPanel">
+                <div class="form-group">
+                    <label for="username">New Password</label>
+                    <input type="text" name="username" id="username" [(ngModel)]="login.username" 
+                    class="form-control" autocomplete="off" placeholder="eg. John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="username">Confirm Password</label>
+                    <input type="text" name="username" id="username" [(ngModel)]="login.username" 
+                    class="form-control" autocomplete="off" placeholder="eg. John Doe" required>
+                </div>
+                <button type="submit" class="d-flex" class="btn btn-theme" (click)="new_password()">
+                    Verify OTP
+                    <img src="../../../assets/icons/ring.svg" style="width: 15px;" class="ml-2 animte_animated animate__fadeInLeft" *ngIf="submit"  alt="">
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="link-group">
+        <div class="links">
+            <a href="http://turtleye.com/">Developed by TurtlEye</a>
+        </div>
+        <div class="links">
+            <a routerLink="/privacy">Privacy Policy</a>
+            <a routerLink="/terms">Terms and Conditions</a>
+            <a routerLink="/contacts">Contact Us</a>
+        </div>
+    </div>
+    <img src="../../../assets/img/login/login-bg-2.png" style="position:absolute;right:0;bottom: 0;z-index:0; opacity: 0.5">
+</section>
+
+

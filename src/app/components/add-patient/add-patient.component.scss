@@ -1,0 +1,37 @@
+
+  .addpatient{
+      padding: 3rem 1.5rem;
+      
+  }
+  .file-wrapper{
+    width: 8rem;
+    height: 8rem;
+    background: url('../../../assets/img/doctors/profile.png') center no-repeat;
+    background-size: cover;
+    border-radius: 999px;
+    label{
+      display: inline-block;
+      margin-bottom: .5rem;
+      top: 48%;
+      left: 38%;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: white;
+      position: absolute;
+      opacity: 0;
+    }
+    &:hover label{
+      opacity: 1;
+    }
+    .photo{
+      width: 8rem;
+      height: 8rem;
+      border-radius: 999px;
+      opacity: 0;
+    }
+  }
+  @media(min-width){
+    .addpatient{
+      padding: 3rem 4rem;
+    }
+  }

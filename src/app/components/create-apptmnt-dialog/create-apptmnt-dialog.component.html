@@ -1,0 +1,305 @@
+<div class="load" [hidden]="confirmBooking">
+    <div class="blocker">
+        <img src="../../../assets/icons/ring.svg" width="40px" alt="">
+    </div>
+</div>
+<div class="load" [hidden]="!loading">
+    <div class="blocker">
+        <img src="../../../assets/icons/ring.svg" width="40px" alt="">
+    </div>
+</div>
+
+<div class="confirm-booking" *ngIf="confirmBooking">
+    <div class="action-native">
+        <div class="token">
+            <div class="label">Token</div>
+            <div class="value"> {{confirmBooking.token==null?'-':confirmBooking.token}}</div>
+        </div>
+        <div class="token" *ngIf="current_token">
+            <div class="label">Current</div>
+            <div class="value"> {{current_token || '-'}} </div>
+        </div>
+        <button class="print" (click)="print()" title="Print Appointment Reciept">
+            <span class="material-icons">print</span>
+        </button>
+        <button (click)="close_dialog()" class="closing" title="Close">
+            <span class="material-icons">clear</span>
+        </button>
+    </div>
+    <div class="header">
+        <div class="header-wrapper">
+            <div class="doctor d-flex">
+                <div class="pic" *ngIf="confirmBooking.doctor">
+                    <img src="{{confirmBooking.doctor.photo == null ? '../../../assets/icons/doctor_grey.png':confirmBooking.doctor.photo}}"
+                        width="100%" class="circle" alt="">
+                </div>
+                <div class="content">
+                    <span>
+                        <div class="name">{{confirmBooking.doctor.name==null?'-':confirmBooking.doctor.name}}</div>
+                        <div class="desig" *ngIf="confirmBooking.doctor.doctor_detail">
+                            {{confirmBooking.doctor.doctor_detail.designation==null?'-':confirmBooking.doctor.doctor_detail.designation|uppercase}}
+                        </div>
+                    </span>
+                </div>
+            </div>
+            <div class="patient">
+                <span>
+                    <div class="" *ngIf="confirmBooking.isSelfBooking">
+                        <div class="token font08">
+                            {{confirmBooking.patient.ref_id==null?'-':confirmBooking.patient.ref_id}}</div>
+                        <div class="patNm">{{confirmBooking.patient.name==null?'-':confirmBooking.patient.name}}</div>
+                    </div>
+                    <div class="" *ngIf="!confirmBooking.isSelfBooking">
+                        <div class="patNm">
+                            {{confirmBooking.other_patient_name==null?'-':confirmBooking.other_patient_name}}</div>
+                    </div>
+                    <span class="contact">
+                        <div class="nu" *ngIf="confirmBooking.isSelfBooking">
+                            {{confirmBooking.patient.phone==null?'-':confirmBooking.patient.phone}}</div>
+                        <div class="nu" *ngIf="!confirmBooking.isSelfBooking">
+                            {{confirmBooking.other_patient_phone==null?'-':confirmBooking.other_patient_phone}}</div>
+                    </span>
+                    <div class="small-text text-left" *ngIf="!confirmBooking.isSelfBooking">
+                        <span>Booked By: {{confirmBooking.patient.name}} ({{confirmBooking.patient.ref_id}})</span> <br>
+                        <span> {{confirmBooking.patient.phone}} </span>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="myContainer">
+        <div class="app_time">
+            <div class="consulation_type small-text">
+                <span
+                    *ngIf="confirmBooking.consultation_type">{{confirmBooking.consultation_type==null?'-':confirmBooking.consultation_type|uppercase}}
+                    CONSULTATION</span>
+            </div>
+            <div class="appointment_date">
+                <div class="date right">
+                    <div class="thumb"></div>
+                    <div class="text">
+                        {{confirmBooking.appointment_date==null?'-':confirmBooking.appointment_date|date:'MMM d'}}</div>
+                </div>
+                <div class="time">
+                    <div class="thumb"></div>
+                    <div class="text">
+                        {{confirmBooking.appointment_date==null?'-':confirmBooking.appointment_date|date:'shortTime'}}
+                    </div>
+                </div>
+            </div>
+            <div class="booking-id text-center">
+                <span *ngIf="confirmBooking.booking_id"
+                    class="color-accent ntiveMargin">{{confirmBooking.booking_id==null?'-':confirmBooking.booking_id}}</span>
+            </div>
+        </div>
+        <div class="consultation text-center">
+            <div class="timeline">
+                <div class="list">
+                    <div class="date">
+                        <div class="d">{{confirmBooking.created_at==null?'-':confirmBooking.created_at|date:'dd'}}</div>
+                        <div class="my">{{confirmBooking.created_at==null?'-':confirmBooking.created_at|date:'MMM'}},
+                            {{confirmBooking.created_at|date:'yyyy'}}</div>
+                    </div>
+                    <div class="tline">
+                        <div class="thumb vertical"></div>
+                    </div>
+                    <div class="detail">
+                        <div class="state">
+                            BOOKED
+                        </div>
+                        <div class="date">
+                            {{confirmBooking.created_at==null?'-':confirmBooking.created_at|date:'shortTime'}}
+                        </div>
+                        <div class="action d-flex mt-2" *ngIf="confirmBooking.status.status == 'Booked'">
+                            <button class="btn btn-theme-sm btn-sm" (click)="completed()"
+                                title="Complete Appointment">Complete</button>
+                            <button class="btn btn-theme-outline btn-sm ml-2" (click)="cancel_appointment()"
+                                *ngIf="(confirmBooking.status.status == 'Booked') && role == 'Admin'"
+                                title="Cancel Appointment">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="list" *ngIf="confirmBooking.status.status == 'Completed'">
+                    <div class="date">
+                        <div class="d">
+                            {{confirmBooking.status.updated_at==null?'-':confirmBooking.status.updated_at|date:'dd'}}
+                        </div>
+                        <div class="my">
+                            {{confirmBooking.status.updated_at==null?'-':confirmBooking.status.updated_at|date:'MMM'}},
+                            {{confirmBooking.status.updated_at|date:'yyyy'}}</div>
+                    </div>
+                    <div class="tline">
+                        <div class="thumb vertical"></div>
+                    </div>
+                    <div class="detail">
+                        <div class="state">
+                            COMPLETED
+                        </div>
+                        <div class="date">
+                            {{confirmBooking.status.updated_at==null?'-':confirmBooking.status.updated_at|date:'shortTime'}}
+                        </div>
+                    </div>
+                </div>
+                <div class="list" *ngIf="confirmBooking.status.status == 'Cancelled'">
+                    <div class="date">
+                        <div class="d">
+                            {{confirmBooking.status.updated_at==null?'-':confirmBooking.status.updated_at|date:'dd'}}
+                        </div>
+                        <div class="my">
+                            {{confirmBooking.status.updated_at==null?'-':confirmBooking.status.updated_at|date:'MMM'}},
+                            {{confirmBooking.status.updated_at|date:'yyyy'}}</div>
+                    </div>
+                    <div class="tline">
+                        <div class="thumb vertical"></div>
+                    </div>
+                    <div class="detail">
+                        <div class="state">
+                            CANCELLED
+                        </div>
+                        <div class="date">
+                            {{confirmBooking.status.updated_at==null?'-':confirmBooking.status.updated_at|date:'shortTime'}}
+                        </div>
+                        <div class="date subtext-light" *ngIf="confirmBooking.status.reason">
+                            {{confirmBooking.status.reason==null?'-':confirmBooking.status.reason}}
+                        </div>
+                    </div>
+                </div>
+                <div class="list" *ngIf="(confirmBooking.status.status == 'Cancelled')">
+                    <div class="date">
+                        <div class="d">
+                            {{confirmBooking.status.updated_at==null?'-':confirmBooking.status.updated_at|date:'dd'}}
+                        </div>
+                        <div class="my">
+                            {{confirmBooking.status.updated_at==null?'-':confirmBooking.status.updated_at|date:'MMM'}},
+                            {{confirmBooking.status.updated_at|date:'yyyy'}}</div>
+                    </div>
+                    <div class="tline">
+                        <div class="thumb vertical"></div>
+                    </div>
+                    <div class="detail">
+                        <div class="state">
+                            REFUND INITIATED
+                        </div>
+                        <div class="date">
+                            {{confirmBooking.status.updated_at==null?'-':confirmBooking.status.updated_at|date:'shortTime'}}
+                        </div>
+                        <!-- <div class="date subtext-light" *ngIf="confirmBooking.payment.status == -1 && confirmBooking.payment.mode == 'Cash'">
+                            Refund Initiated on {{(confirmBooking.status.updated_at|date) || '-'}}
+                        </div> -->
+                        <div class="action d-flex mt-2"
+                            *ngIf="(confirmBooking.payment.status == -1 && confirmBooking.payment.mode == 'Cash') && role == 'Admin'">
+                            <button class="btn btn-theme-sm btn-sm" (click)="completeRefund()"
+                                title="Refund Appointment" [disabled]="confirmRefund">
+                                Complete Refund
+                                <img class="ml-1" *ngIf="confirmRefund" src="../../../assets/icons/ring.svg"
+                                    width="18px" alt="">
+                            </button>
+                        </div>
+                        <!-- <div class="date subtext-light" *ngIf="confirmBooking.payment.status == -2 && confirmBooking.payment.mode =='Cash'">
+                            Refund completed on {{ confirmBooking.payment.updated_at|date }}.
+                        </div> -->
+                        <!-- <div class="date subtext-light" *ngIf="confirmBooking.payment.status == 2">
+                            Refund completed on {{ confirmBooking.payment.updated_at|date }}.
+                        </div> -->
+                        <!-- <div class="date subtext-light" *ngIf="(confirmBooking.payment.status == -1 && confirmBooking.payment.mode == 'Online')">
+                            Refund will be completed in 3-5 business days.
+                        </div> -->
+                    </div>
+                </div>
+                <div class="list"
+                    *ngIf="confirmBooking.status.status == 'Cancelled' && (confirmBooking.payment.status == -2 || confirmBooking.payment.status == 2)">
+                    <div class="date">
+                        <div class="d">
+                            {{confirmBooking.payment.updated_at==null?'-':confirmBooking.payment.updated_at|date:'dd'}}
+                        </div>
+                        <div class="my">
+                            {{confirmBooking.payment.updated_at==null?'-':confirmBooking.payment.updated_at|date:'MMM'}},
+                            {{confirmBooking.payment.updated_at|date:'yyyy'}}</div>
+                    </div>
+                    <div class="tline">
+                        <div class="thumb vertical"></div>
+                    </div>
+                    <div class="detail">
+                        <div class="state">
+                            REFUND COMPLETED
+                        </div>
+                        <div class="date">
+                            {{confirmBooking.payment.updated_at==null?'-':confirmBooking.payment.updated_at|date:'shortTime'}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="mod-footer">
+            <div class="text-left" *ngIf="confirmBooking.doctor.doctor_detail">
+                <span class="ml-2 mr-2" style="font-size: 0.9rem;">{{ (confirmBooking.payment.mode|uppercase) || '-' }}
+                    PAYMENT </span>
+            </div>
+            <div class="text-right" *ngIf="confirmBooking.doctor.doctor_detail">
+                <span style="font-size: 0.9rem;">Consulation Fees: </span>
+                <span class="ml-2 mr-2">Rs. {{consultation_fees || '-'}} </span>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<br><br><br><br>
+<div id="contentToConvert" *ngIf="confirmBooking">
+    <title>Charnock SmartOPD</title>
+    <div style="width: 604.7px; display: block; margin: auto; font-family: arial; font-size: 14px;">
+        <header style="height: 48.8px;"></header>
+        <div style="height: 574.4px;position: relative;">
+            <div style="left: 11.3px; top: 22.33px; width: 283.4px; height: 56.6px; position: absolute;">
+                <div style="left: 85; top: 2px; position: relative;">{{confirmBooking.patient.ref_id || '-'}} </div>
+                <div style="left: 85; top: 5px; position: relative;" *ngIf="confirmBooking.isSelfBooking">
+                    {{confirmBooking.patient.name || '-'}}</div>
+                <div style="left: 85; top: 5px; position: relative;" *ngIf="!confirmBooking.isSelfBooking">
+                    {{confirmBooking.other_patient_name==null?'-':confirmBooking.other_patient_name}}</div>
+                <div style="left: 85; top: 7px; position: relative;">
+                    {{confirmBooking.patient.age || confirmBooking.patient.dob || '-'}} /
+                    {{confirmBooking.patient.gender || '-'}}</div>
+            </div>
+            <div style="left: 306.1px; top: 22.33px; width: 283.4px; height: 56.6px; position: absolute;">
+                <div style="left: 65.3; top: 2px; position: relative; ">{{confirmBooking.doctor.name || '-'}} </div>
+                <div style="left: 65.3; top: 5px; position: relative;">-</div>
+                <div style="left: 65.3; top: 7px; position: relative;">
+                    {{confirmBooking.appointment_date == null ? '-' : confirmBooking.appointment_date|date:'shortTime'}}
+                </div>
+            </div>
+            <div style="height:442.2px; left: 11.3px; width: 579px; top: 79.5px;  position: absolute;">
+                <div style="left: 11px; top: 14px; position: relative;">Booking Id: <b
+                        style="font-size: 16px;">{{confirmBooking.booking_id || '-'}}</b> </div>
+                <div style="left: 250px; top: 14px; position: absolute;" *ngIf="data.origin != 'admission'">App. Date:
+                    <b style="font-size: 16px;">
+                        {{confirmBooking.appointment_date==null?'-':confirmBooking.appointment_date}} </b></div>
+                <div style="left: 235px; top: 14px; position: absolute;" *ngIf="data.origin == 'admission'">App. Date:
+                    <b style="font-size: 16px;">
+                        {{confirmBooking.appointment_date==null?'-':confirmBooking.appointment_date}} </b></div>
+                <div style="right: 11px; top: 14px; position: absolute;"
+                    *ngIf="!current_token && data.origin != 'admission'">Token: <b
+                        style="font-size: 16px;">{{confirmBooking.token || '-'}} </b></div>
+                <div style="right: 11px; top: 14px; position: absolute;"
+                    *ngIf="current_token && data.origin != 'admission'">Token: <b
+                        style="font-size: 16px;">{{current_token || '-'}} </b></div>
+                <div style="right: 0px; top: 14px; position: absolute;" *ngIf="data.origin == 'admission'">Fees: <b
+                        style="font-size: 16px;"> Rs. {{consultation_fees || '-'}} </b></div>
+                <div style="left: 11px; bottom: 11px; position: absolute;">
+                    <span style="border: 1px solid; border-radius: 3px; padding: 3px 5px;"
+                        *ngIf="confirmBooking.consultation_type">
+                        <b>{{confirmBooking.consultation_type || '-'}} Consultation</b>
+                    </span>
+                </div>
+                <!-- <div style="left: 220px; bottom: 11px; position: absolute;" *ngIf="data.origin != 'admission'">
+                    Reporting Time: <b style="font-size: 16px;"> {{confirmBooking.approx_time== null?(confirmBooking.appointment_date|date:'shortTime'):confirmBooking.approx_time}}</b>
+                </div> -->
+                <div style="right: 11px; bottom: 11px; position: absolute;" *ngIf="data.origin != 'admission'">
+                    Fees: <b style="font-size: 16px;"> Rs. {{consultation_fees || '-'}} </b>
+                </div>
+            </div>
+            <div style="height: 30.26px; left: 11.3px; width: 579px; top: 532.1px; position: absolute;">
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+<div class="about">
+    <div class="card shadow-sm" *ngIf="doctor.doctor_detail.qualifications">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="logo">
+                    Q
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="card-body">
+                    <div class="heading">Qualification</div>
+                    <ul *ngIf="doctor.doctor_detail.qualifications">
+                        <li class="badge badge-pill badge-light mr-2 " *ngFor="let quali of doctor.doctor_detail.qualifications">{{ quali }} </li>
+                    </ul>
+                </div>   
+            </div>
+        </div>
+    </div>
+    <div class="card shadow-sm" *ngIf="doctor.departments">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="logo">
+                    D
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="card-body">
+                    <div class="heading">Department</div>
+                    <ul *ngIf="doctor.departments">
+                        <li class="badge badge-pill badge-light mr-2 " *ngFor="let dept of doctor.departments">{{ dept.name }} </li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="card shadow-sm" *ngIf="doctor.doctor_detail.experience">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="logo">
+                    E
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="card-body">
+                    <div class="heading" *ngIf="doctor.doctor_detail.experience">Experience</div>
+                    <ul>
+                        <li class="badge badge-pill badge-light mr-2 " *ngIf="doctor.doctor_detail.experience">{{ doctor.doctor_detail.experience }} </li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="card shadow-sm" *ngIf="doctor.doctor_detail.designation">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="logo">
+                    D
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="card-body">
+                    <div class="heading" *ngIf="doctor.doctor_detail.designation" >Designation</div>
+                    <ul>
+                        <li class="badge badge-pill badge-light mr-2 " *ngIf="doctor.doctor_detail.designation">{{ doctor.doctor_detail.designation }} </li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="card shadow-sm" *ngIf="doctor.doctor_detail.offline_fees">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="logo">
+                    F
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="card-body">
+                    <div class="heading" *ngIf="doctor.doctor_detail.offline_fees" >Fees</div>
+                    <ul>
+                        <li class="badge badge-pill badge-light mr-2 " *ngIf="doctor.doctor_detail.offline_fees">Offline - {{ doctor.doctor_detail.offline_fees|currency:'₹' }}</li>
+                        <li class="badge badge-pill badge-light mr-2 " *ngIf="doctor.doctor_detail.online_fees">Online - {{ doctor.doctor_detail.online_fees|currency:'₹' }}</li>
+                    </ul>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>

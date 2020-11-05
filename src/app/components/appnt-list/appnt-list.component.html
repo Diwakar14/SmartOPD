@@ -1,0 +1,175 @@
+<div class="appnt">
+    <div class="heading">
+        <div class="primary">
+            Appointments
+            <span>Dashboard / Appointments</span>
+        </div>
+        <div class="secondary d-flex">
+            
+            <div class="inputBox">
+                <input 
+                    type="text" 
+                    #searchAppointment
+                    autocomplete="off" 
+                    id="appointment_search" 
+                    class="searchInput" 
+                    placeholder="Search by name, designation" />
+                <button class="search">
+                  <span class="material-icons color-accent">
+                    search
+                  </span>
+                </button>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="blocker" [hidden]="!loading">
+            <img src="../../../assets/icons/ring.svg" width="40px" alt="">
+        </div>
+        <div class="d-flex filter">
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch1" [(ngModel)]="filter.app_only" (change)="applyFilter()">
+                <label class="custom-control-label" for="customSwitch1">App Appointments</label>
+            </div>
+            <div class="inputBox  mr-2 ml-auto" style="width: 20rem;margin-bottom: 0.8rem;margin-top: 0.8rem;">
+                <input 
+                    class="searchInput paddingFilter border-right" 
+                    style="width: 10rem;"
+                    type="date"
+                    placeholder="Start date" 
+                    [(ngModel)]="filter.start_date" 
+                    (change)="applyFilter()"
+                >
+                <input 
+                    type="date"
+                    class="searchInput paddingFilter" 
+                    style="width: 10rem;"
+                    min="{{filter.start_date}}"
+                    [disabled]="!filter.start_date"
+                    placeholder="End date" 
+                    [(ngModel)]="filter.end_date" 
+                    (change)="applyFilter()"
+                >
+                
+            </div>
+            <div class="clear_filter ml-3" (click)="clear_filter()">
+                CLEAR
+            </div>
+        </div>
+        
+        <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th scope="col" class="text-left" width="10%">Date</th>
+                <!-- <th scope="col" class="text-center" width="8%">Ref. ID</th> -->
+                <th scope="col" width="15%">Pat. Name</th>
+                <!-- <th scope="col" class="text-center" width="10%">Contact</th> -->
+                <th scope="col" class="text-center" width="15%">Booking ID</th>
+                <th scope="col" class="text-left" width="11%">Appnt Date</th>
+                <th scope="col" class="text-left" width="20%">Doctor</th>
+                <th scope="col" class="text-center" width="10%">Cons. Type</th>
+                <th scope="col" class="text-center" width="5%">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let appnt of filteredAppointments | paginate: config" (click)="showDetails(appnt)">
+                <th class="text-left">
+                    <div class="datetime">
+                        <div class="time text-bold">
+                            {{appnt.created_at==null?'-':appnt.created_at|date:'shortTime'}}
+                        </div>
+                        <div class="date text-small text-muted">
+                            {{appnt.created_at==null?'-':appnt.created_at|date}}
+                        </div>
+                    </div>
+                </th>
+                <!-- <td class="text-muted text-center">
+                    {{appnt.patient.ref_id==null?'-':appnt.patient.ref_id}}
+                </td> -->
+                <td class="text-bold">
+                    <a routerLink="/dashboard/patient/{{appnt.patient.id}}">{{appnt.patient.name==null?'-':appnt.patient.name}}</a>
+                    <div class="text-small" *ngIf="!appnt.isSelfBooking" style="font-weight: 400;">
+                        For: {{appnt.other_patient_name || "-"}}
+                    </div>
+                </td>
+                <!-- <td class="text-muted text-center">{{appnt.patient.phone==null?'-':appnt.patient.phone}}</td> -->
+                <td class="text-muted text-center">
+                    <span class="showDetails" >{{appnt.booking_id==null?'-':appnt.booking_id}}</span>
+                </td>
+                <td class="text-muted text-left text-small text-light">
+                    <div class="datetime">
+                        <div class="time text-bold">
+                            {{appnt.appointment_date_original==null?'-':appnt.appointment_date_original|date:'shortTime'}}
+                        </div>
+                        <div class="date text-small text-muted">
+                            {{appnt.appointment_date_original==null?'-':appnt.appointment_date_original|date}}
+                        </div>
+                    </div>
+                </td>
+                <td class="text-left">
+                    <div class="doc">
+                        <div class="name text-bold">
+                            <a routerLink="/dashboard/doctor/{{appnt.doctor_id}}"> {{appnt.doctor.name==null?'-':appnt.doctor.name}}</a>
+                        </div>
+                        <div class="design text-small text-muted" *ngIf="appnt.doctor.doctor_detail">
+                            {{appnt.doctor.doctor_detail.designation || "-"}}
+                        </div>
+                    </div>
+                </td>
+                <td *ngIf="appnt" 
+                class="text-muted text-center ">{{(appnt.consultation_type|uppercase) || "-"}}</td>
+                <td *ngIf="appnt.status.status" class="text-muted text-center ">
+                    <span class="px-2" 
+                    [class.booked]="appnt.status.status == 'Booked'" 
+                    *ngIf="appnt.status.status == 'Booked'">
+                        BOOKED
+                    </span>
+                    <span class="px-2" 
+                    *ngIf="appnt.status.status == 'Cancelled'"
+                    [class.cancel]="appnt.status.status == 'Cancelled'">
+                        CANCELLED
+                    </span>
+                    <span class="px-2" 
+                    *ngIf="appnt.status.status == 'NoShow'" 
+                    [class.noShow]="appnt.status.status == 'NoShow'">
+                        NO SHOW
+                    </span>
+                    <span class="px-2" 
+                    [class.completed]="appnt.status.status == 'Completed'" 
+                    *ngIf="appnt.status.status == 'Completed'">
+                        COMPLETED
+                    </span>
+                </td>
+            </tr>
+            
+            </tbody>
+          </table>
+          <p *ngIf="filteredAppointments.length == 0" class="text-center text-light-b">No Appointments</p>
+
+          <pagination-template #p="paginationApi"
+                     [id]="config.id"
+                     (pageChange)="config.currentPage = $event; getPage($event)">
+            <div class="pagination">
+                <div class="page-item pagination-previous" [class.disabled]="p.isFirstPage()">
+                    <button [disabled]="p.isFirstPage()"  (click)="p.previous()"> < </button>
+                </div>
+
+                <div class="page-item" *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+                    <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+                        <span>{{ page.label }}</span>
+                    </a>
+                    <div *ngIf="p.getCurrent() === page.value">
+                        <span>{{ page.label }}</span>
+                    </div>
+                </div>
+                <div class="page-item pagination-next" [class.disabled]="p.isLastPage()">
+                    <button [disabled]="p.isLastPage()" (click)="p.next()"> > </button>
+                </div>
+            </div>
+
+        </pagination-template>
+    </div>
+    <br>
+</div>

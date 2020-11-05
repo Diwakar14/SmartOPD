@@ -1,0 +1,17 @@
+<div class="alert">
+    <h3 mat-dialog-title>Charnock SmartOPD</h3>
+    <form #f="ngForm">
+        <mat-dialog-content class="mat-typography p-0">
+            <h4>Are you sure you want to send this notification ?</h4>
+            <br>
+            <h4 *ngIf="title" class="mb-0 p-0"> <b> Title:</b> {{title}} </h4>
+            <h4 *ngIf="message" class="mt-2"> <b> Message:</b> {{message}} </h4>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button class="btn" mat-dialog-close="false">Cancel</button>
+            <button (click)="confirm()" class="btn btn-theme-sm" cdkFocusInitial>
+                Send Notification
+            </button>
+        </mat-dialog-actions>
+    </form>
+</div>

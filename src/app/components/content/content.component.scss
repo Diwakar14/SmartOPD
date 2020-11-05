@@ -1,0 +1,186 @@
+.card{
+    border: 1px solid #fff;
+    width: 100%;
+    cursor: pointer;
+    transition: all ease .2s;
+    .card-image{
+        max-height: 300px;
+        min-height: 300px;
+        object-fit: cover;
+        overflow: hidden;
+    }
+}
+.card:hover{
+    border: 1px solid  rgb(238, 248, 249);
+    transition: all ease-out .2s;
+    box-shadow: 0 0.5rem 1rem rgba(43, 95, 124, 0.1) !important;
+}
+.card-image img{
+    transition: all ease-in .1s;
+    height: 300px;
+    object-fit: cover;
+}
+.card:hover .card-image{
+    filter: grayscale(0%) !important;
+    img{
+        transition: all ease-out .2s;
+        transform: scale(1.05);
+    }
+}
+
+.allDoctor{
+    padding: 1rem 1.5rem;
+}
+
+.allDoctor .header{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #f7f7f7;
+    .primary{
+        // display: flex;
+        .title{
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        .breadcrum{
+            font-size: 0.8rem;
+            color: #687477;
+        }
+    }
+    .secondary .inputBox{
+        display: flex;
+        border-radius: 6px;
+        border: 1px solid #089eae;
+        overflow: hidden;
+        width: 20rem;
+        .search{
+            background: transparent;
+            outline: none;
+            border: none;
+            color: inherit;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .searchInput{
+            outline: none;
+            border: none;
+            font-size: 0.8rem;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            padding-left: 12px;
+            width: 100%;
+            background: transparent;
+        }
+        .searchInput:hover .inputBox{
+            width: 23rem;
+        }
+        .searchInput::placeholder{
+            font-size: 0.8rem;
+            color: #687477;
+        }
+    }
+}
+
+.allDoctor .content{
+    padding: 1.5rem 0;
+    margin-bottom: 1rem;
+    position: relative;
+    .dept{
+        margin-bottom: 2rem;
+    }
+    .dept .heading{
+        font-size: 0.95rem;
+        padding: 0.5rem 1rem;
+        text-transform: uppercase;
+        background: white;
+        color: #00c3ce;
+        display: block;
+        letter-spacing: 1px;
+        width:max-content;
+        border-radius: 0.2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 0.2rem 0.5rem rgba(43, 95, 124, 0.1);
+        .logo{
+            margin-right: 0.5rem;
+            width: 1rem;
+        }
+    }
+    .dept .doc-list{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 2rem;
+        row-gap: 2rem;
+    }
+    .dept .doc-list .card{
+        box-shadow: 0 0.2rem 0.8rem rgba(43, 95, 124, 0.1);
+        .card-image{
+            border-bottom: 1px solid #008389;
+            transition: all ease .2s;
+            filter: grayscale(100%);
+            border-radius: 4px 4px 0 0;
+            
+        }
+        .card-body{
+            text-align: center;
+            padding-top: 1.25rem;
+            .doc-name{
+                font-size: 20px;
+                color: #091921;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+            .doc-name:hover{
+                font-size: 20px;
+                color: #091921;
+                white-space: unset;
+                text-overflow: initial;
+                overflow: initial;
+                cursor: pointer;
+            }
+            .doc-deg{
+                font-size: 14px;
+                color: #008389;
+                // line-height: 0rem;
+                margin-bottom: 1.2rem;
+            }
+            .doc-quali{
+                font-size: 14px;
+                color: #545454;
+            }
+        }
+    }
+}
+
+.quali-chip{
+    padding: 0 0.3rem;
+    margin-right: 0.3rem;
+    border-right: 2px double #687477;
+    &:last-child{
+        border-right: none;
+    }
+}
+.blocker{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: #faffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+@media(min-width:1500px){
+    .dept .doc-list{
+        grid-template-columns: 1fr 1fr 1fr 1fr !important;
+    }
+    .allDoctor{
+        padding: 1rem 4rem;
+   }
+}

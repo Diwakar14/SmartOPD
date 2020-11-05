@@ -1,0 +1,115 @@
+.card{
+    border: 0;
+    // height: 100%;
+    overflow: hidden;
+}
+input[type=date]{
+    font-size: 14px;
+}
+.full-width{
+    width: 100%;
+}
+
+.heading{
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+.card .heading{
+    display: flex;
+    .logo{
+        width: 30px;
+        height: 30px;
+        padding: 0.2rem;
+        margin-top: -2px;
+        margin-right: 1rem;
+    }
+}
+.content{
+    margin-top: 2rem;
+}
+.pillbody{
+    display: flex;
+    flex-wrap: wrap;
+    .pill{
+        margin-right: 0.5rem;
+        border-radius: 5rem;
+        box-shadow: 0 0.1rem 0.2rem rgba(170, 170, 170, 0.8);
+        padding: 0.5rem 1rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        background: #fff;
+        
+        strong{
+            font-size: 0.75rem;
+        }
+        div{
+            font-size: 0.7rem;
+            color: #aaa;
+            padding-top: 0.2rem;
+            margin-top: 0.2rem;
+            line-height: initial;
+            border-top: 1px solid #f0f0f0;
+        }
+    }
+}
+.wrapper .name{
+    font-size: 1rem;
+    color: #091921;
+}
+.wrapper .time{
+    font-size: 0.8rem;
+    color: #687477;
+}
+
+.btn-theme{
+    font-size: 0.8rem;
+}
+.blocker{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.app-list{
+    padding-left: 1rem;
+    .app-list-item{
+        padding: 0.5rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        margin-right: 0;
+        width: 100%;
+        &::before{
+            content: "";
+            height: calc(100% - 0rem);
+            top: calc(50% + 0.4rem);
+            left: -1px;
+            width: 1px;
+            background: #005c66;
+            position: absolute;
+        }
+        &::after{
+            content: "";
+            height: 0.9rem;
+            top: calc(50% - 0.5rem);
+            left: -0.5rem;
+            width: 0.9rem;
+            border: 2px solid #005c66;
+            position: absolute;
+            background: white;
+            border-radius: 1rem;
+        }
+        &:first-child{
+            margin-top: 0;
+        }
+        &:last-child{
+            margin-bottom: 0;
+        }
+    }
+}

@@ -1,0 +1,175 @@
+.notification{
+    padding: 0 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.notification .heading{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(204, 204, 204, 0.5);
+}
+.notification .heading .primary{
+    font-size: 1.5rem;
+    padding-bottom: 0.4rem;
+    span{
+        margin-left: 1rem;
+        font-size: 0.8rem;
+        color: #687477;
+    }
+}
+
+.del{
+    cursor: pointer;
+    padding: 2px;
+    margin-left: 0.3rem;
+    background: #8fb4d5;
+    border-radius: 999px;
+    color: #daf0f2;
+}
+.del:hover{
+    background: rgb(168, 80, 98);
+    border-radius: 999px;
+    padding: 2px;
+    color: white;
+
+}
+.output-search{
+    max-height: 400px;
+    overflow-y: auto;
+    width: calc(100% - 50px);
+    position: absolute;
+    background: white;
+    z-index: 15;
+}
+.output-search ul{
+    padding:0;
+    margin: 0;
+    li{
+        padding: 0.3rem 1rem;
+        margin-bottom: 0.2rem;
+        list-style: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    li:hover{
+        background: #daf0f2;
+    }
+}
+.uploadFile{
+    background: white;
+    padding: 1rem;
+}
+.file-wrapper{
+    width: 10rem;
+    height: 10rem;
+    background: url('../../../assets/img/notifi/upload-photo.png') center no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+    margin: auto;
+    
+    position: relative;
+    label{
+      display: inline-block;
+      margin-bottom: .5rem;
+      top: 170px;
+      left: 20px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: black;
+      position: absolute;
+    }
+    .photo{
+      width: 10rem;
+      height: 10rem;
+      border-radius: 10px;
+      opacity: 0;
+    }
+  }
+
+  .myForm-control{
+      background: white;
+      padding: 0.5rem 1rem;
+      border-radius: 9px;
+      
+      border: 1px solid;
+      border-bottom: 1px solid #089eae !important;
+      outline: none;
+      border-color: #089eae;
+      width: 100%;
+      height: 100%;
+  }
+
+  .myForm-control:focus{
+        box-shadow: 0 0.1rem 0.3rem #089dae59;
+  }
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff !important;
+    background-color: #089eae;
+}
+
+.nav-pills .nav-link{
+    color: #089eae !important;
+    background-color: #fff;
+    border: 1px solid ;
+    border-color: #089eae !important;
+    margin-right: 1rem;
+    padding: 0.3rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 2rem;
+}
+
+
+
+.inputBox{
+  display: flex;
+  border-radius: 6px;
+  border: 1px solid #687477;
+  overflow: hidden;
+  width: 100%;
+  .search{
+      background: transparent;
+      outline: none;
+      border: none;
+      color: inherit;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  .searchInput{
+      outline: none;
+      border: none;
+      font-size: 0.8rem;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: 8px;
+      width: 100%;
+      background: transparent;
+  }
+  .searchInput:hover .inputBox{
+      width: 23rem;
+  }
+  .searchInput::placeholder{
+      font-size: 0.8rem;
+      color: #687477;
+  }
+}
+
+.chip-group{
+    display: flex;
+    flex-wrap: wrap;
+}
+.chip-group .chip{
+    background: #daf0f2;
+    color: #575757;
+    border-radius: 4px;
+    padding: 3px 6px;
+    margin-top: 3px;
+    margin-right: 3px;
+    font-size: 0.8rem;
+}
+
+@media (min-width: 1500px){
+    .notification{
+        padding: 3rem 4rem;
+    }
+}

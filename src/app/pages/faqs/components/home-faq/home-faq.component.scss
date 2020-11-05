@@ -1,0 +1,28 @@
+.faqs{
+    padding: 0rem 1.5rem;
+}
+.contact{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.contact-list{
+    text-align: center;
+}
+
+.faqs .heading .primary{
+    font-size: 1.5rem;
+    padding-bottom: 0.4rem;
+    color: #091921;
+    span{
+        margin-left: 1rem;
+        font-size: 0.8rem;
+        color: #687477;
+    }
+}
+
+@media(min-width:1500px){
+    .faqs{
+        padding: 3rem 4rem;
+    }
+}

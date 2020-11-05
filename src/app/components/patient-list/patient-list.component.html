@@ -1,0 +1,95 @@
+<div class="patient">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="heading">
+          <div class="primary">
+              All Patients
+              <span>Dashboard / All Patients</span>
+          </div>
+          <div class="secondary">
+              <div class="inputBox">
+                  <input type="search" (keyup)="searchPat($event)" class="searchInput" placeholder="Search by name, refId, contact" />
+                  <button class="search">
+                    <span class="material-icons color-accent">
+                    search
+                    </span>
+                  </button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive mt-2" id="main" *ngIf="filteredPatients">
+      <div class="blocker" *ngIf="loading">
+        <img src="../../../assets/icons/ring.svg" width="40px" alt="">
+      </div>
+      <table class="table table-borderless" id="myTable">
+        <thead>
+          <tr>
+            <th scope="col" width="5%"></th>
+            <th scope="col" class="" width="15%">Name</th>
+            <th scope="col" class="text-center" width="10%">Ref.ID</th>
+            <th scope="col" class="text-center" width="10%">Gender</th>
+            <th scope="col" class="text-center" width="10%">Contact</th>
+            <th scope="col" class="text-center" width="10%">Age</th>
+            <th scope="col" class="text-center" width="10%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let patient of filteredPatients | paginate: config" routerLink="/dashboard/patient/{{patient.id}}">
+            <td>
+              <div style="" class="ml-auto ava-30" >
+                <img src="{{patient.photo == null?'../../../assets/icons/doctor_grey.png':patient.photo}}" width="100%" alt="" >
+              </div>
+            </td>
+            <td class="d-flex">
+              <span class="color-theme" style="font-weight: 500;" routerLink="/dashboard/patient/{{patient.id}}">{{patient.name}}</span>
+            </td>
+            <td class="text-center">
+              <span >{{ patient.ref_id==null?'-':patient.ref_id }}</span>
+            </td>
+            <td class="text-center">
+              <span>{{ patient.gender==null?'-':patient.gender }}</span>
+
+            </td>
+            <td class="text-center" style="font-weight: 500;">
+              {{ patient.phone==null?'-':patient.phone }}
+            </td>
+            <td class="text-center">
+              {{patient.age==null?'-':patient.age}} Years
+            </td>
+            <td>
+              <div class="wrapper d-flex ">
+                <button class="btn btn-theme-sm d-block m-auto" routerLink="/dashboard/patient/book/{{patient.id}}">Book</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="filteredPatients.length == 0" class="text-center text-light-b">No Patients</p>
+
+      <br>
+      <pagination-template #p="paginationApi"
+                     [id]="config.id"
+                     (pageChange)="config.currentPage = $event; getPage($event)">
+        <div class="pagination">
+            <div class="page-item pagination-previous" [class.disabled]="p.isFirstPage()">
+                <button [disabled]="p.isFirstPage()"  (click)="p.previous()"> < </button>
+            </div>
+
+            <div class="page-item" *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+                <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+                    <span>{{ page.label }}</span>
+                </a>
+                <div *ngIf="p.getCurrent() === page.value">
+                    <span>{{ page.label }}</span>
+                </div>
+            </div>
+            <div class="page-item pagination-next" [class.disabled]="p.isLastPage()">
+                <button [disabled]="p.isLastPage()" (click)="p.next()"> > </button>
+            </div>
+        </div>
+    </pagination-template>
+    </div>
+  </div>
+  

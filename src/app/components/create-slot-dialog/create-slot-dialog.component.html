@@ -1,0 +1,67 @@
+<div class="createPatient">
+    <div class="heading">
+        {{patient.id == null?'Add Patient':'Update Patient'}}
+    </div>
+
+    <div class="blocker" *ngIf="loading">
+        <img src="../../../assets/icons/ring.svg" width="40px" alt="">
+    </div>
+    <form #f="ngForm" class="card" (ngSubmit)="addPatient(f)">
+        <div class="form-group">
+            <label for="">Name *</label>
+            <input type="text" [(ngModel)]="patient.name" class="form-control" name="name" required>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-6">
+                <div class="form-group">
+                    <label for="">Age *</label>
+                    <input type="text" maxlength="3" [(ngModel)]="patient.age" class="form-control" name="age" required>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <div class="form-group">
+                    <label for="">D.O.B </label>
+                    <input type="date" [(ngModel)]="patient.dob" class="form-control" name="DOB">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="">Gender *</label>
+            <select class="form-control" name="gender" [(ngModel)]="patient.gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-6">
+                <div class="form-group">
+                    <label for="">Phone</label>
+                    <input type="text" class="form-control" name="phone" (change)="checkUniqueness(phone)" [(ngModel)]="patient.phone" maxlength="10" minlength="5" #phone="ngModel" >
+                    <small *ngIf="phoneUniqueErrors" >Checking...</small>
+                    <div *ngIf="phone.invalid">
+                        <small class="text-danger" *ngIf="phone.errors.minlength">Phone no. must be of 10 digits</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <div class="form-group">
+                    <label for="">Whatsapp Number</label>
+                    <input type="text" maxlength="10" [(ngModel)]="patient.whatsapp_number" class="form-control" name="whats_app">
+                </div>
+            </div>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="phone_what" [(ngModel)]="patient.isWhatsAppNoSameAsPhone" (change)="checkPhone()" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+                Same For Whatapp
+            </label>
+        </div>
+        <div mat-dialog-actions>
+            <button type="reset" class="btn" mat-dialog-close="true">Cancel</button>
+            <button type="submit" class="btn btn-theme-sm" [disabled]="!f.valid" cdkFocusInitial>
+                {{patient.id == null?'Add Patient':'Update Patient'}}
+            </button>
+        </div>
+    </form>
+</div>

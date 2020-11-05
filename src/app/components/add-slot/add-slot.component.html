@@ -1,0 +1,183 @@
+<div class="card p-0">
+    <div class="heading border-bottom mb-2 p-2">
+        <div class="logo">
+            <img src="../../../assets/icons/profile/SLOTS.png" alt="" width="100%">
+        </div>
+        <div class="card-title">
+            Slots
+        </div>
+    </div>
+    
+    <form class="mt-0 p-3" [formGroup]="slotForm" (ngSubmit)="addSlot()" *ngIf="role=='Admin'">
+          <div class="form-group">
+            <label for="">Days*</label>
+            <div class="checkbox-group">
+                <label class="days">
+                    <input type="checkbox" name="Monday" #monday (click)="addDays(monday)">
+                    <div class="content">
+                        M
+                    </div>
+                </label>
+                <label class="days">
+                    <input type="checkbox" name="Tuesday" #tuesday (click)="addDays(tuesday)">
+                    <div class="content">
+                        T
+                    </div>
+                </label>
+                <label class="days">
+                    <input type="checkbox" name="Wednesday" #wednesday (click)="addDays(wednesday)">
+                    <div class="content">
+                        W
+                    </div>
+                </label>
+                <label class="days">
+                    <input type="checkbox" name="Thursday" #thursday (click)="addDays(thursday)">
+                    <div class="content">
+                        T
+                    </div>
+                </label>
+                <label class="days">
+                    <input type="checkbox" name="Friday" #friday (click)="addDays(friday)">
+                    <div class="content">
+                        F
+                    </div>
+                </label>
+                <label class="days">
+                    <input type="checkbox" name="Saturday" #saturday (click)="addDays(saturday)">
+                    <div class="content">
+                        S
+                    </div>
+                </label>
+                <label class="days">
+                    <input type="checkbox" name="Sunday" #sunday (click)="addDays(sunday)">
+                    <div class="content">
+                        S
+                    </div>
+                </label>
+            </div>
+            <small class="text-danger" *ngIf="dayError">Select atleast one Day</small>
+          </div>
+
+          <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="">Start Time*</label>
+                    <input type="time" 
+                    name="start_time" 
+                    formControlName="start_time"
+                    [(ngModel)]="slot.start_time" 
+                    class="form-control" 
+                    required>
+                    <small class="text-danger" *ngIf="start_time.touched && start_time.invalid">Start time is req.</small>
+                </div>    
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="">End Time*</label>
+                    <input type="time" 
+                    name="end_time" 
+                    formControlName="end_time"
+                    [(ngModel)]="slot.end_time"
+                    class="form-control" 
+                    min="{{slot.start_time}}"
+                    required>
+                    <div *ngIf="end_time.touched && end_time.invalid">
+                        <small class="text-danger" *ngIf="end_time.errors.required">End Time is req.</small>
+                        <small class="text-danger" *ngIf="end_time.errors.min">Time should be greater than {{ start_time.value }}.</small>
+                    </div>
+                </div> 
+                <!-- {{ slot.start_time }} -->
+              </div>
+          </div>
+          <br>
+          <label for="">Consultation Type*</label>
+            <br>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="consultation_type" 
+                [(ngModel)]="slot.consultation_type" required
+                formControlName="consultation_type"
+                id="inlineRadio1" 
+                value="Online">
+                <label class="form-check-label" for="inlineRadio1">Online Consultation</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="consultation_type" 
+                [(ngModel)]="slot.consultation_type" required
+                formControlName="consultation_type"
+                id="inlineRadio2" value="Offline">
+                <label class="form-check-label" for="inlineRadio2">OPD Visit</label>
+            </div>
+            <small class="text-danger" *ngIf="consultation_type.touched && consultation_type.invalid">Start time is req.</small>
+            <br>
+          <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="">No. of Patients*</label>
+                    <input type="text" name="no_patients"
+                    formControlName="no_of_pat"
+                    [(ngModel)]="slot.max_patient_count" class="form-control" required>
+                    <small class="text-danger" *ngIf="no_of_pat.touched && no_of_pat.invalid">No of Patient is req.</small>
+                </div>   
+              </div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-theme-sm" *ngIf="docDeleted" [disabled]="!slotForm.valid || submit" >Submit</button>
+            </div>
+
+    </form>
+    <div id="showSlots" class="p-3">
+        <div class="blocker" [hidden]="!loading">
+            <img src="../../../assets/icons/ring.svg" width="40px" alt="">
+        </div>
+        <div class="card-body">
+            <p *ngIf="allslots.length == 0" class="text-center text-light-b">No slots available for this doctor</p>
+            <div class="media mb-2" *ngFor="let day of allslots">
+                <div class="align-self-start text-center" style="width: 3.1rem;">
+                    <h3>{{day.day|uppercase|slice:0:1}}</h3>
+                    <small class="sub d-block">{{day.day|uppercase|slice:0:3}}</small>
+                </div>
+                <div class="media-body">
+                    <div class="wrapper online" *ngFor="let slot of day.online_slots">
+                        <div class="logo">
+                            <img src="../../../assets/icons/profile/ONLINE-CONSULTATION.png" alt="" width="100%">
+                        </div>
+                        <div class="content">
+                            <div class="heading">Online Consultation</div>
+                            <div class="sub-heading">
+                                <span class="material-icons">query_builder</span> {{slot.start_time}} to {{slot.end_time}}
+                            </div>
+                        </div>
+                        <div class="ml-auto d-flex" *ngIf="role=='Admin'">
+                            <div class="del" (click)="editSlot(slot)">
+                                <span class="material-icons">edit</span>
+                            </div>
+                            <div class="del ml-2" (click)="deleteSlot(slot)">
+                                <span class="material-icons">clear</span>
+                            </div>    
+                        </div>
+                        
+                    </div>
+                    <div class="wrapper offline" *ngFor="let slot of day.offline_slots">
+                        <div class="logo">
+                            <img src="../../../assets/icons/profile/OPD-VISIT.png" alt="" width="100%">
+                        </div>
+                        <div class="content">
+                            <div class="heading">OPD </div>
+                            <div class="sub-heading">
+                                <span class="material-icons">query_builder</span> {{slot.start_time}} to {{slot.end_time}}
+                            </div>
+                        </div>
+                        <div class="ml-auto d-flex" *ngIf="role=='Admin'">
+                            <div class="del" (click)="editSlot(slot)">
+                                <span class="material-icons">edit</span>
+                            </div>
+                            <div class="del ml-2" (click)="deleteSlot(slot)">
+                                <span class="material-icons">clear</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>

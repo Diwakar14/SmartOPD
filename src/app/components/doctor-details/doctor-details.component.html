@@ -1,0 +1,50 @@
+<div class="card" *ngIf="loading">
+    <div class="card-body">
+        <div class="text-center">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+    </div>
+</div>
+<ng-template #somethingWentWrong>
+    <div class="card">
+        <div class="card-body">
+            <h2 class="text-muted text-center" >Loading...</h2>
+        </div>
+    </div>
+</ng-template>
+<div class="docProfile" *ngIf="doctor;  else somethingWentWrong">
+    <div class="header">
+        <div class="profile">
+            <ng-template #noDocImage>
+                <div class="avatar">
+                  <img src="../../../assets/icons/doctor_grey.png" alt="" width="100%">
+                </div>
+              </ng-template>
+              <div class="avatar" *ngIf="doctor.photo; else noDocImage">
+                <img src="{{doctor.photo}}" alt="" width="100%">
+              </div>
+        </div>
+        <div class="profile">
+            <div class="name"> {{ doctor.name }} </div>
+            <div class="qualification" *ngIf="doctor.doctor_detail.qualifications">
+                <span *ngFor="let quali of doctor.doctor_detail.qualifications; last as isLast"> 
+                    <span *ngIf="!isLast">{{ quali }}  •  </span>
+                    <span *ngIf="isLast"> {{ quali }} </span>
+                </span>
+            </div>
+            <hr>
+            <div class="dept" *ngIf="doctor.departments!=null">
+                <span *ngFor="let dept of doctor.departments; last as isLast"> 
+                    <span *ngIf="!isLast">{{ dept.name }}  •  </span>
+                    <span *ngIf="isLast">{{ dept.name }} </span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="body">
+        
+    </div>
+</div>

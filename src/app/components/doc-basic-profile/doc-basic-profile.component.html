@@ -1,0 +1,173 @@
+<div class="iq-card"> 
+    <div class="blocker" [hidden]="!loading" >
+      <img src="../../../assets/icons/ring.svg" width="40px" alt="">
+    </div>
+    <div class="iq-card-body pl-0 pr-0 pt-0">
+       <div class="doctor-details-block" *ngIf="doctor">
+          <div class="doc-profile-bg bg-primary" style="height:150px;"></div>
+          <div class="doctor-profile text-center">
+             <img src="{{doctor.photo==null?'../../../assets/icons/favIcon.png':doctor.photo}}" alt="profile-img" class="avatar-130 img-fluid ">
+          </div>
+          <div class="text-center mt-3 pl-3 pr-3">
+             <h5 class="name">
+                {{doctor.name==null?'-':doctor.name}}
+               <span class="material-icons edit" *ngIf="(role == 'Admin')" (click)="editBasic()">edit</span>
+             </h5>
+             <p class="desig">{{doctor.doctor_detail.designation==null?'-':doctor.doctor_detail.designation}}</p>
+             <span class="small">D.O.B: {{doctor.dob==null?'-':doctor.dob}} | </span> 
+             <span class="small"> &nbsp; Gender: {{doctor.gender==null?'-':doctor.gender}}</span>
+          </div>
+          <hr>
+          <ul class="doctoe-sedual d-flex align-items-center justify-content-between p-0 m-0">
+             <li class="text-center">
+                <h3 class="counter">4500</h3>
+                <span>Appointments</span>
+              </li>
+              <li class="text-center">
+                <h3 class="counter">100</h3>
+                <span>Unique Patients </span>
+              </li>
+              <li class="text-center">
+                <h3 class="counter">4.5</h3>
+                <span>Rating </span>
+              </li>
+          </ul>
+          <hr>
+
+          <div class="fees_info">
+             <div class="heading">Fees</div>
+             <div class="wrapper">
+               <div class="primary">
+                  <div class="logo">
+                     <img src="../../../assets/icons/profile/ONLINE-CONSULTATION.png" alt="" width="100%">
+                  </div>
+                  <div class="content">
+                     <div class="title">Online <br> Consultation </div>
+                     <div class="sub-title">Rs. {{doctor.doctor_detail.online_fees==null?'-':doctor.doctor_detail.online_fees}}</div>
+                  </div>
+               </div>
+               <div class="secondary ml-4">
+                  <div class="logo">
+                     <img src="../../../assets/icons/profile/OPD-VISIT.png" alt="" width="100%">
+                  </div>
+                  <div class="content">
+                     <div class="title">OPD <br> Consultation </div>
+                     <div class="sub-title">Rs. {{doctor.doctor_detail.offline_fees==null?'-':doctor.doctor_detail.offline_fees}}</div>
+                  </div>
+               </div>
+             </div>
+          </div>
+          <div class="medical_info">
+            <div class="heading">
+               Medical Information
+               <span class="material-icons edit" *ngIf="(role == 'Admin')" (click)="editMedical()">edit</span>
+            </div>
+            <div class="wrapper">
+              <div class="primary">
+                 <div class="logo">
+                  <img src="../../../assets/icons/profile/DEPARTMENT.png" alt="" width="100%">
+                 </div>
+                 <div class="content">
+                    <div class="title">Department</div>
+                    <div class="sub-title">{{doctor.doctor_detail.department.name==null?'-':doctor.doctor_detail.department.name}}</div>
+                 </div>
+              </div>
+              <div class="secondary ml-4">
+                 <div class="logo">
+                  <img src="../../../assets/icons/profile/EXPERIENCE.png" alt="" width="100%">
+                 </div>
+                 <div class="content">
+                    <div class="title">Experience</div>
+                    <div class="sub-title">{{doctor.doctor_detail.experience==null?'-':doctor.doctor_detail.experience}} Years</div>
+                 </div>
+              </div>
+            </div>
+            <div class="wrapper">
+              <div class="primary" style="width: 100%;">
+                 <div class="logo">
+                  <img src="../../../assets/icons/profile/EDUCATION.png" alt="" width="100%">
+                 </div>
+                 <div class="content" style="width: 100%;">
+                    <div class="title">Qualification</div>
+                    <div class="sub-title">
+                       <span *ngFor="let quali of qualifications"> {{quali}}, </span>
+                    </div>
+                 </div>
+              </div>
+            </div>
+
+            <div class="wrapper">
+              <div class="primary" style="width: 100%;">
+                 <div class="logo">
+                  <img src="../../../assets/icons/profile/SPECIALISATION.png" alt="" width="100%">
+                 </div>
+                 <div class="content" style="width: 100%;">
+                    <div class="title">Specialisation</div>
+                    <div class="sub-title">
+                     <span *ngFor="let speci of specializations"> {{speci}}, </span>
+                    </div>
+                 </div>
+              </div>
+            </div>
+          </div>
+          <div class="contact_info">
+            <div class="heading">
+               Contact Information
+               <span class="material-icons edit" *ngIf="(role == 'Admin')" (click)="editContact()">edit</span>
+            </div>
+            <div class="wrapper">
+              <div class="primary">
+                 <div class="logo">
+                  <img src="../../../assets/icons/profile/CALL.png" alt="" width="100%">
+                 </div>
+                 <div class="content">
+                    <div class="title">Phone</div>
+                    <div class="sub-title">{{doctor.phone==null?'-':doctor.phone}}</div>
+                 </div>
+              </div>
+              <div class="secondary ml-4">
+                 <div class="logo">
+                  <img src="../../../assets/icons/profile/WHATSAPP.png" alt="" width="100%">
+                 </div>
+                 <div class="content">
+                    <div class="title">Whatsapp</div>
+                    <div class="sub-title">{{doctor.whatsapp_number==null?'-':doctor.whatsapp_number}}</div>
+                 </div>
+              </div>
+            </div>
+            <div class="wrapper">
+              <div class="primary">
+                 <div class="logo">
+                  <img src="../../../assets/icons/profile/EMAIL.png" alt="" width="100%">
+                 </div>
+                 <div class="content">
+                    <div class="title">Email</div>
+                    <div class="sub-title">{{doctor.email==null?'-': doctor.email}}</div>
+                 </div>
+              </div>
+            </div>
+            <div class="wrapper">
+              <div class="primary">
+                 <div class="logo">
+                  <img src="../../../assets/icons/profile/ADDRESS.png" alt="" width="100%">
+                 </div>
+                 <div class="content">
+                    <div class="title">Address</div>
+                    <ng-template class="sub-title" #noAddress>-</ng-template>
+                    <div class="sub-title" *ngIf="doctor.address; else noAddress">
+                       {{doctor.address.address_line_1 || ''}},{{doctor.address.address_line_2 || ''}}.
+                       {{doctor.address.city || ''}}. {{doctor.address.country || ''}}
+                    </div>
+                 </div>
+              </div>
+            </div>
+          </div>
+          <div class="remove p-2 bg-light" >
+            <div class="text-center d-block action" *ngIf="(!doctor.doctor_detail.toBeDeleted) && role == 'Admin'" (click)="delDoc()">Remove Doctor</div>
+            <div class="text-center d-block action" *ngIf="(doctor.doctor_detail.isActive) && role == 'Admin'" (click)="deactivateDoc('disable')">Deactivate Doctor</div>
+            <div class="text-center d-block action" *ngIf="(!doctor.doctor_detail.isActive) && role == 'Admin'" (click)="deactivateDoc('enable')">Activate Doctor</div>
+         </div>
+       </div>
+    </div>
+    
+ </div>

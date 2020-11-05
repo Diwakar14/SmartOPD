@@ -1,0 +1,189 @@
+<section class="side-navbar" id="sidebar" data-scrollbar>
+    <a class="brand" routerLink="/dashboard/home">
+        <img src="../../../assets/img/logo/logo.png" style="width: 48px !important;">
+        <span>Smart OPD</span>
+    </a>
+    <ul class="list accordion" id="appointments">
+        <li class="list-item" routerLinkActive="active" routerLink="/dashboard/home">
+            <div class="head" data-toggle="collapse" data-target="#dashboardtab" aria-expanded="true"
+                aria-controls="dashboardtab">
+                <img src="../../../assets/img/sidebar/home-08.svg" />
+                <span>Dashboard</span>
+            </div>
+        </li>
+        <li class="list-item" id="headingOne">
+            <div class="head" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                aria-controls="collapseOne">
+                <img src="../../../assets/img/sidebar/appointment-07.svg" />
+                <span class="text">Appointments</span>
+                <b class="caret"></b>
+            </div>
+        </li>
+        <ul id="collapseOne" class="sub-list collapse" aria-labelledby="headingOne" data-parent="#appointments">
+            <li class="sub-list-item">
+                <a class="head" routerLink="/dashboard/appointments" routerLinkActive="sub-menu-active">
+                    <img src="../../../assets/img/sidebar/circle-regular.svg" />
+                    <span>View Appointments</span>
+                </a>
+            </li>
+            <li class="sub-list-item">
+                <a class="head" routerLink="/dashboard/appointment/book" routerLinkActive="sub-menu-active">
+                    <img src="../../../assets/img/sidebar/circle-regular.svg" />
+                    <span>Book Appointment</span>
+                </a>
+            </li>
+        </ul>
+        <!-- <li class="list-item" id="admission">
+            <div class="head" data-toggle="collapse" data-target="#admissionTab" aria-expanded="true" aria-controls="admissionTab">
+                <img src="../../../assets/img/sidebar/appointment-07.svg" />
+                <span class="text" >Admission</span>
+                <b class="caret"></b>
+            </div>
+        </li>
+        <ul id="admissionTab" class="sub-list collapse" aria-labelledby="admission" data-parent="#appointments">
+            <li class="sub-list-item">
+                <a class="head" routerLink="/dashboard/admissions" routerLinkActive="sub-menu-active">
+                    <img src="../../../assets/img/sidebar/circle-regular.svg" />
+                    <span>View Admission</span>
+                </a>
+            </li>
+            <li class="sub-list-item">
+                <a class="head" routerLink="/dashboard/admit/patient" routerLinkActive="sub-menu-active">
+                    <img src="../../../assets/img/sidebar/circle-regular.svg" />
+                    <span>Admit Patient</span>
+                </a>
+            </li>
+        </ul> -->
+        <li class="list-item" id="headingDoc" routerLink="/dashboard/doctors">
+            <div class="head" data-toggle="collapse" data-target="#doctor" aria-expanded="true" aria-controls="doctor">
+                <img src="../../../assets/img/sidebar/doctor-09.svg" />
+                <span>Doctors</span>
+                <!-- <b class="caret"></b> -->
+            </div>
+        </li>
+        <!-- <ul id="doctor" class="sub-list collapse" aria-labelledby="headingDoc"  data-parent="#appointments">
+            <li class="sub-list-item">
+                <a class="head" routerLink="/dashboard/doctors" routerLinkActive="sub-menu-active">
+                    <img src="../../../assets/img/sidebar/circle-regular.svg" />
+                    <span>All Doctors</span>
+                </a>
+            </li>
+            <li class="sub-list-item" *ngIf="role == 'Admin'">
+                <a class="head" routerLink="/dashboard/doctor/add" routerLinkActive="sub-menu-active">
+                    <img src="../../../assets/img/sidebar/circle-regular.svg" />
+                    <span>Add Doctor</span>
+                </a>
+            </li>
+        </ul> -->
+        <li class="list-item" id="headingPat" routerLink="/dashboard/patients" routerLinkActive="active">
+            <div class="head" data-toggle="collapse" data-target="#patient" aria-expanded="true"
+                aria-controls="patient">
+                <img src="../../../assets/img/sidebar/patient-10.svg" />
+                <span>Patients</span>
+                <!-- <b class="caret"></b> -->
+            </div>
+        </li>
+        <!-- <ul id="patient" class="sub-list collapse" aria-labelledby="headingPat" data-parent="#appointments">
+            <li class="sub-list-item">
+                <a class="head" routerLink="/dashboard/patients" routerLinkActive="sub-menu-active">
+                    <img src="../../../assets/img/sidebar/circle-regular.svg" />
+                    <span>All Patient</span>
+                </a>
+            </li>
+            <li class="sub-list-item">
+                <a class="head" routerLink="/dashboard/patient/add" routerLinkActive="sub-menu-active">
+                    <img src="../../../assets/img/sidebar/circle-regular.svg" />
+                    <span>Add Patient</span>
+                </a>
+            </li>
+        </ul> -->
+        <li class="list-item" id="headingDept" routerLink="/dashboard/departments" routerLinkActive="active">
+            <div class="head" data-toggle="collapse" data-target="#department" aria-expanded="true"
+                aria-controls="department">
+                <img src="../../../assets/img/sidebar/department-12.svg" />
+                <span>Departments</span>
+                <!-- <b class="caret"></b> -->
+            </div>
+        </li>
+        <!-- <ul id="department" class="sub-list collapse" aria-labelledby="headingDept" data-parent="#appointments">
+            <li class="sub-list-item">
+                <a class="head" routerLink="/dashboard/departments" routerLinkActive="sub-menu-active">
+                    <img src="../../../assets/img/sidebar/circle-regular.svg" />
+                    <span>All Departments</span>
+                </a>
+            </li>
+            <li class="sub-list-item">
+                <a class="head" href="#" routerLinkActive="sub-menu-active">
+                    <img src="../../../assets/img/sidebar/circle-regular.svg" />
+                    <span>Add Department</span>
+                </a>
+            </li>
+        </ul> -->
+
+        <li class="list-item" id="headingStaff" routerLink="/dashboard/staff" routerLinkActive="active"
+            *ngIf="role == 'Admin'">
+            <div class="head" data-toggle="collapse" data-target="#staff" aria-expanded="true" aria-controls="staff">
+                <img src="../../../assets/img/sidebar/staff-13.svg" />
+                <span>Staffs</span>
+            </div>
+        </li>
+        <li class="list-item" routerLink="/dashboard/notification" routerLinkActive="active" *ngIf="role == 'Admin'">
+            <div class="head">
+                <img src="../../../assets/img/sidebar/notification-06.svg" />
+                <span>Notifications</span>
+            </div>
+        </li>
+        <li class="list-item" routerLink="/dashboard/reports">
+            <div class="head">
+                <img src="../../../assets/img/sidebar/report-14.svg" />
+                <span>Reports</span>
+            </div>
+        </li>
+        <li class="list-item">
+            <div class="head">
+                <img src="../../../assets/img/sidebar/lab-15.svg" />
+                <span>Laboratory</span>
+            </div>
+        </li>
+        <li class="list-item">
+            <div class="head">
+                <img src="../../../assets/img/sidebar/meds-16.svg" />
+                <span>Medicine Shop</span>
+            </div>
+        </li>
+        <li class="list-item" id="headingSupport">
+            <div class="head" data-toggle="collapse" data-target="#support" aria-expanded="true"
+                aria-controls="department">
+                <img src="../../../assets/img/sidebar/support-11.svg" />
+                <span>Support</span>
+                <b class="caret"></b>
+            </div>
+        </li>
+        <ul id="support" class="sub-list collapse" aria-labelledby="headingSupport" data-parent="#appointments">
+            <li class="sub-list-item">
+                <a class="head" routerLink="/dashboard/faqs" routerLinkActive="sub-menu-active">
+                    <img src="../../../assets/img/sidebar/circle-regular.svg" />
+                    <span>Help and FAQs</span>
+                </a>
+            </li>
+            <li class="sub-list-item">
+                <a class="head" routerLink="/dashboard/contacts" routerLinkActive="sub-menu-active">
+                    <img src="../../../assets/img/sidebar/circle-regular.svg" />
+                    <span>Contacts</span>
+                </a>
+            </li>
+            <li class="sub-list-item">
+                <a class="head" routerLink="/dashboard/terms" routerLinkActive="sub-menu-active">
+                    <img src="../../../assets/img/sidebar/circle-regular.svg" />
+                    <span>Terms & Conditions</span>
+                </a>
+            </li>
+            <li class="sub-list-item">
+                <a class="head" routerLink="/dashboard/privacy" routerLinkActive="sub-menu-active">
+                    <img src="../../../assets/img/sidebar/circle-regular.svg" />
+                    <span>Privacy Policy</span>
+                </a>
+            </li>
+        </ul>
+    </ul>
+</section>

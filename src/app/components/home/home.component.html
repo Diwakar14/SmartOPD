@@ -1,0 +1,219 @@
+
+<div class="home">
+    <div class="heading">
+        <div class="pri">
+            Dashboard
+        </div>
+    </div>
+    <br>
+    <div class="homeGrid topGrid">
+        <div class="plates bigHeight">
+            <div class="header mt-3">
+                <div class="text">
+                    <div class="logo">
+                        <img src="../../../assets/icons/profile/APPOINTMENTS.png" width="100%" alt="">
+                    </div>
+                    <div class="title ml-2">
+                        Appointments
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <circle-progress
+                        [percent]="appointments.current_month"
+                        [radius]="40"
+                        [space]="-4"
+                        [outerStrokeWidth]="7"
+                        [innerStrokeWidth]="1"
+                        [showInnerStroke]="true"
+                        [outerStrokeColor]="'#be1622'"
+                        [innerStrokeColor]="'#be1500'"
+                        [animation]="true"
+                        [animationDuration]="300"
+                    ></circle-progress>
+                    <circle-progress
+                        [percent]=" appointments.today"
+                        [radius]="40"
+                        [space]="-4"
+                        [outerStrokeWidth]="7"
+                        [innerStrokeWidth]="1"
+                        [outerStrokeColor]="'#78C000'"
+                        [innerStrokeColor]="'#aaa'"
+                        [animation]="true"
+                        [animationDuration]="300"
+                    ></circle-progress> 
+                </div>
+            </div>
+            <div class="footer">
+                <button class="btn btn-theme" routerLink="/dashboard/appointments">View All</button>
+                <button class="btn btn-theme-outline ml-2" routerLink="/dashboard/appointment/book">Book Appointment</button>
+            </div>
+        </div>
+        <div class="plates bigHeight">
+            <div class="card primary">
+                <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                      <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                      <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <div class="carousel-caption">
+                          <p>A good physician treats the disease, the great physician treats the patient who has the disease</p>
+                        </div>
+                      </div>
+                      <div class="carousel-item">
+                        <div class="carousel-caption">
+                          <p>Do as much as possible for the patient, and as little as possible to the patient</p>
+                        </div>
+                      </div>
+                      <div class="carousel-item">
+                        <div class="carousel-caption">
+                          <p>People pay the doctor for his trouble; for his kindness they still remain in his debt</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <div class="homeGrid middleGrid">
+        <div class="plates smallHeight">
+            <div class="header">
+                <div class="text">
+                    <div class="title">
+                        Department
+                    </div>
+                    <!-- <div class="subtitle">
+                        Department Activity
+                    </div> -->
+                </div>
+                <div class="logo">
+                    <img src="../../../assets/Dashboard icons/dashboard_departments.png" width="100%" alt="">
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div class="text" style="color: #ff8a3b;">
+                    <!-- <span>₹</span>59,000 -->
+                    {{departments.length}}
+                </div>
+                <div class="action">
+
+                </div>
+            </div>
+        </div>
+        <div class="plates smallHeight">
+            <div class="header">
+                <div class="text">
+                    <div class="title">
+                        Doctors
+                    </div>
+                    <!-- <div class="subtitle">
+                        Department Activity
+                    </div> -->
+                </div>
+                <div class="logo">
+                    <img src="../../../assets/Dashboard icons/dashboard_doctors.png" width="100%" alt="">
+                </div>
+            </div>
+            <div class="footer">
+                <div class="text" style="color: #006f9b;">
+                    <!-- <span>₹</span>59,000 -->
+                    {{doctors}}
+                </div>
+                <div class="action">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="plates smallHeight">
+            <div class="header">
+                <div class="text">
+                    <div class="title">
+                        Patient
+                    </div>
+                    <!-- <div class="subtitle">
+                        Department Activity
+                    </div> -->
+                </div>
+                <div class="logo">
+                    <img src="../../../assets/Dashboard icons/dashboard_patient.png" width="100%" alt="">
+                </div>
+            </div>
+            <div class="footer">
+                <div class="text" style="color: #be1622;">
+                    <!-- <span>₹</span>59,000 -->
+                    {{patientCount}}
+                </div>
+                <div class="action">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="plates smallHeight">
+            <div class="header">
+                <div class="text">
+                    <div class="title">
+                        Staff
+                    </div>
+                    <!-- <div class="subtitle">
+                        Department Activity
+                    </div> -->
+                </div>
+                <div class="logo">
+                    <img src="../../../assets/Dashboard icons/dashboard_staff.png" width="100%" alt="">
+                </div>
+            </div>
+            <div class="footer">
+                <div class="text" style="color: #1ed2e3;">
+                    <!-- <span>₹</span>59,000 -->
+                    {{staff}}
+                </div>
+                <div class="action">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="homeGrid bottomGrid ">
+        <div class=" bigHeight">
+            <div class="header p-0">
+                <div class="text">
+                    Doctor on Holiday
+                </div>
+                <div class="action"></div>
+            </div>
+            <div class="body p-0">
+                <table class="table table-hover table-borderless">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col" class="text-left">Designation</th>
+                        <th scope="col" class="text-left">Department</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let holiday of holiday_doc">
+                        <td *ngIf="holiday && holiday.doctor_detail"><a routerLink="/dashboard/doctor/{{holiday.doctor_detail.doctor_id}}">{{holiday.name}}</a></td>
+                        <td class="text-left" *ngIf="holiday && holiday.doctor_detail">{{holiday.doctor_detail.designation}}</td>
+                        <td class="text-left" *ngIf="holiday && holiday.doctor_detail" >{{holiday.doctor_detail.department.name}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+        <div class="plates bigHeight">
+            <div class="header">
+                <div class="text">
+                    Doctor in Different Departments
+                </div>
+                <div class="action"></div>
+            </div>
+            <div class="body">
+                <div id="myChart" #chart width="100%"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,322 @@
+<div class="reports">
+    <div class="heading ">
+        <div class="primary">
+            Reports
+            <span>Dashboard / Reports</span>
+        </div>
+    </div>
+    <mat-drawer-container class="drawer" [hasBackdrop]="false">
+        <mat-drawer #drawer [mode]="'side'" position="end">
+            <div class="head border-bottom p-2">
+                <div class="title">
+                    <span>
+                        <img class="mr-2" *ngIf="reportQuery=='Staff'"
+                            src="../../../assets/img/report/staff-wise-collection.png" width="30px" alt="">
+                        <img class="mr-2" *ngIf="reportQuery=='Department'"
+                            src="../../../assets/img/report/department-wise-collection.png" width="30px" alt="">
+                        <img class="mr-2" *ngIf="reportQuery=='Daily'"
+                            src="../../../assets/img/report/daily-collection.png" width="30px" alt="">
+                    </span>
+                    {{reportType == 'instant'?'Instant':''}}
+                    {{reportType == 'cancellation'?'Cancellation':''}}
+                    {{reportType == 'summary'?'Summary of ':''}}
+                    {{reportQuery || '-'}} Report
+                </div>
+                <div class="close mr-2" (click)="drawer.close()">
+                    <div class="material-icons">clear</div>
+                </div>
+            </div>
+
+            <div class="drawer-content p-3">
+                <form #f="ngForm" (ngSubmit)="getReport(f)" class="mt-0">
+                    <div class="form-group mb-0"
+                        *ngIf="reportQuery == 'Staff' || reportQuery == 'Department' || reportType=='cancellation'">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="today" [(ngModel)]="report.today" type="checkbox"
+                                id="inlineCheckbox1" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox1">Today</label>
+                        </div>
+                    </div>
+                    <div class="form-group"
+                        *ngIf="reportQuery == 'Daily' && (reportType == 'revenue' || reportType=='summary')">
+                        <label for="start_date">Date</label>
+                        <input type="date" name="start_date" [(ngModel)]="report.start_date" [disabled]="report.today"
+                            class="form-control">
+                    </div>
+                    <div class="row"
+                        *ngIf="reportQuery == 'Staff' || reportQuery == 'Department' || reportType=='cancellation'">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="start_date">Start Date</label>
+                                <input type="date" name="start_date" [(ngModel)]="report.start_date"
+                                    [disabled]="report.today" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="end_date">End Date</label>
+                                <input type="date" name="end_date" min="report.start_date" [(ngModel)]="report.end_date"
+                                    [disabled]="report.today" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <br> -->
+                    <div class="form-group" *ngIf="reportQuery == 'Staff'">
+                        <label for="id">Staff</label>
+                        <input type="search" (keyup)="searchStaff($event)" id="staff_search" autocomplete="off"
+                            name="id" placeholder="Search staff" [(ngModel)]="report.id" class="form-control">
+                        <div class="output-search shadow-sm">
+                            <ul>
+                                <li *ngFor="let staff of filteredStaff; index as i" (click)="addStaff(staff, i)">
+                                    {{ staff.name }}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="chip-group" *ngIf="sortedStaff.length!=0">
+                            <div class="chip" *ngFor="let staffChip of sortedStaff; index as i">
+                                {{staffChip.name}}
+                                <span class="material-icons del" (click)="deleteChipStaff(i, 'staff')">clear</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Cancellation -->
+                    <div class="form-group" *ngIf="reportQuery == 'Daily' && reportType == 'cancellation'">
+                        <label for="id">Doctor</label>
+                        <input type="search" (keyup)="searchDoc($event)" id="doctor_search" autocomplete="off" name="id"
+                            placeholder="Search Doctor" [(ngModel)]="report.id" class="form-control">
+                        <div class="output-search shadow-sm">
+                            <ul>
+                                <ng-template ngFor let-dept [ngForOf]="filteredDoc" let-docI="index">
+                                    <li *ngFor="let doc of dept.doctors; index as i" (click)="addDoctor(doc, i)">
+                                        {{ doc.doctor.name }}
+                                    </li>
+                                </ng-template>
+                            </ul>
+                        </div>
+                        <div class="chip-group" *ngIf="sortedDoc.length!=0">
+                            <div class="chip" *ngFor="let docChip of sortedDoc; index as i">
+                                {{docChip.doctor.name}}
+                                <span class="material-icons del" (click)="deleteChipStaff(i, 'doc')">clear</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" *ngIf="reportQuery == 'Daily' && reportType == 'cancellation'">
+                        <label for="id">Patient</label>
+                        <input type="search" (keyup)="searchPat($event)" id="patient_search" autocomplete="off"
+                            name="id" placeholder="Search patient" class="form-control">
+                        <div class="output-search shadow-sm">
+                            <ul>
+                                <li *ngFor="let patient of filteredPat; index as i" (click)="addPatient(patient, i)">
+                                    {{ patient.name }}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="chip-group" *ngIf="sortedPat.length!=0">
+                            <div class="chip" *ngFor="let patChip of sortedPat; index as i">
+                                {{patChip.name}}
+                                <span class="material-icons del" (click)="deleteChipStaff(i, 'pat')">clear</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" *ngIf="reportQuery == 'Daily' && reportType == 'cancellation'">
+                        <label for="id">Staff</label>
+                        <input type="search" (keyup)="searchStaff($event)" id="staff_search" autocomplete="off"
+                            name="id" placeholder="Search staff" class="form-control">
+                        <div class="output-search shadow-sm">
+                            <ul>
+                                <li *ngFor="let staff of filteredStaff; index as i" (click)="addStaff(staff, i)">
+                                    {{ staff.name }}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="chip-group" *ngIf="sortedStaff.length!=0">
+                            <div class="chip" *ngFor="let staffChip of sortedStaff; index as i">
+                                {{staffChip.name}}
+                                <span class="material-icons del" (click)="deleteChipStaff(i, 'staff')">clear</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" *ngIf="reportQuery == 'Department'">
+                        <label for="id">Department</label>
+                        <select name="department" [(ngModel)]="report.id" class="form-control">
+                            <option *ngFor="let department of departments" value="{{department.id}}">
+                                {{department.name}} </option>
+                        </select>
+                    </div>
+
+
+                    <!-- Common -->
+                    <!-- <br> -->
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" id="report_email" name="email" placeholder="your@email.com"
+                            [(ngModel)]="report.email" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="sendToAllAdmin" [(ngModel)]="report.sendToAllAdmin"
+                                type="checkbox" id="sendtoall" value="Send to all">
+                            <label class="form-check-label" for="sendtoall">Send to all Adminstrators</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-theme-sm d-block m-auto" [disabled]="loading">
+                            {{progress.completed?'Downloading...':'Download'}}
+                            <span *ngIf="progress.completed"> {{progress.width}} </span>
+                        </button>
+                        <a #download></a>
+                    </div>
+                </form>
+            </div>
+        </mat-drawer>
+        <mat-drawer-content>
+            <section class="report-content">
+                <div class="head">
+                    <span>
+                        <img src="../../../assets/img/report/daily-collection.png" width="20px" alt="">
+                    </span>
+                    <span class="ml-2 color-dark-blue">
+                        Summary
+                    </span>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 col-md-4 col-lg-4">
+                        <div class="custom-card" (click)="drawer.open(); openDrawer('daily', 'summary')">
+                            <div class="card-body">
+                                <div class="card-head">
+                                    Daily Summary Report
+                                </div>
+                                <div class="card-descp color-green">
+                                    ✓ Particular date. <br>
+                                    ✓ All departments. <br>
+                                    ✓ Download or mail pdf.
+                                </div>
+                            </div>
+                            <div class="card-image">
+                                <img src="../../../assets/img/report/daily-collection.png" width="100%" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="report-content">
+                <div class="head">
+                    <span>
+                        <img src="../../../assets/img/report/revenue.png" width="20px" alt="">
+                    </span>
+                    <span class="ml-2 color-dark-blue">
+                        Revenue
+                    </span>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 col-md-4 col-lg-4">
+                        <div class="custom-card" (click)="drawer.open(); openDrawer('staff', 'revenue')">
+                            <div class="card-body">
+                                <div class="card-head">
+                                    Staff Wise Report
+                                </div>
+                                <div class="card-descp">
+                                    ✓ Particular date or date range. <br>
+                                    ✓ One or multiple staff. <br>
+                                    ✓ Download or mail pdf.
+                                </div>
+                            </div>
+                            <div class="card-image">
+                                <img src="../../../assets/img/report/staff-wise-collection.png" width="100%" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-4 col-lg-4">
+                        <div class="custom-card" (click)="drawer.open(); openDrawer('daily', 'revenue')">
+                            <div class="card-body">
+                                <div class="card-head">
+                                    Daily Collection Report
+                                </div>
+                                <div class="card-descp color-green">
+                                    ✓ Particular date. <br>
+                                    ✓ All departments. <br>
+                                    ✓ Download or mail pdf.
+                                </div>
+                            </div>
+                            <div class="card-image">
+                                <img src="../../../assets/img/report/daily-collection.png" width="100%" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-sm-3 col-md-4 col-lg-4">
+                    <div class="custom-card" (click)="drawer.open(); openDrawer('staff', 'instant')">
+                        <div class="card-body">
+                          <div class="card-head">
+                              Instant Staff Report
+                          </div>
+                          <div class="card-descp">
+                              ✓ Particular date or date range. <br>
+                              ✓ One or multiple staff. <br>
+                              ✓ Download or mail pdf. 
+                          </div>
+                        </div>
+                        <div class="card-image">
+                            <img src="../../../assets/img/report/staff-wise-collection.png" width="100%" alt="">
+                        </div>
+                    </div>
+                  </div> -->
+                    <!-- <div class="col-sm-3 col-md-4 col-lg-4">
+                    <div class="custom-card mt-4" (click)="drawer.open(); openDrawer('daily', 'instant')">
+                        <div class="card-body">
+                          <div class="card-head">
+                              Instant Daily Report
+                          </div>
+                          <div class="card-descp color-green">
+                              ✓ Particular date. <br>
+                              ✓ All departments. <br>
+                              ✓ Download or mail pdf.
+                          </div>
+                        </div>
+                        <div class="card-image">
+                          <img src="../../../assets/img/report/daily-collection.png" width="100%" alt="">
+                         </div>
+                    </div>
+                  </div> -->
+
+                </div>
+
+            </section>
+            <section class="report-content">
+                <div class="head">
+                    <span>
+                        <img src="../../../assets/img/report/cancellation-revenue.png" width="20px" alt="">
+                    </span>
+                    <span class="ml-2 color-dark-blue">
+                        Cancellation
+                    </span>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 col-md-4 col-lg-4">
+                        <div class="custom-card" (click)="drawer.open(); openDrawer('daily', 'cancellation')">
+                            <div class="card-body">
+                                <div class="card-head">
+                                    Cancellation Report
+                                </div>
+                                <div class="card-descp">
+                                    ✓ Particular date. <br>
+                                    ✓ Particular doctors/Staff/Patient. <br>
+                                    ✓ Download or mail pdf.
+                                </div>
+                            </div>
+                            <div class="card-image">
+                                <img src="../../../assets/img/report/daily-collection.png" width="100%" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </mat-drawer-content>
+    </mat-drawer-container>
+
+</div>

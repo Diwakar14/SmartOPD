@@ -1,0 +1,86 @@
+<div class="card p-0">
+  <div class="border-bottom p-2" id="head">
+    <div class="logo">
+      <img src="../../../assets/icons/profile/APPOINTMENTS.png" alt="" width="100%">
+    </div>
+    <div class="card-title mb-0">
+      Appointments
+    </div>
+    <button class="btn btn-theme-sm ml-auto" *ngIf="docDeleted"
+      routerLink="/dashboard/doctor/book/{{doctorId}}">New</button>
+  </div>
+
+  <div class="tab p-3">
+    <ul class="tab-nav">
+      <ng-template ngFor let-app [ngForOf]="appointmentDates" let-i="index" let-lastIndex="last">
+        <li class="tab-item" id="date_{{i+1}}" [class.activeDate]="i==0" (click)="showBookings(app.db_date, i+1)">
+          <div class="tab-nav-link">
+            <strong>{{app.booking_date|date:'EEE'|uppercase}}</strong>
+            <span class="dates">{{app.booking_date|date:'dd'|uppercase}}</span>
+            <span class="month">{{app.booking_date|date:'MMM'|uppercase}}</span>
+          </div>
+        </li>
+      </ng-template>
+    </ul>
+    <p class="text-center text-small w-100 text-light-b" *ngIf="appointmentDates.length == 0">No Appointments.</p>
+
+    <div class="appointment pt-0 p-2">
+      <div class="blocker" [hidden]="!loading">
+        <img src="../../../assets/icons/ring.svg" width="40px" alt="">
+      </div>
+      <div class="heading" *ngIf="appointmentDates.length != 0">
+        Online Slots
+      </div>
+      <div class="slots-group">
+        <ng-template ngFor let-slot [ngForOf]="slots" let-i="index">
+          <span *ngIf="slot.consultation_type=='Online'" class="slot" id="slot_{{i+1}}"
+            title="{{slot.max_patient_count}} Patient in this slot."
+            (click)="showAppForASlot(slot.appointments, i+1, slot)">
+            {{slot.start_time}}
+          </span>
+        </ng-template>
+      </div>
+      <div class="heading" *ngIf="appointmentDates.length != 0">
+        Offline Slots
+      </div>
+      <div class="slots-group">
+        <ng-template ngFor let-slot [ngForOf]="slots" let-i="index">
+          <span *ngIf="slot.consultation_type=='Offline'" class="slot" id="slot_{{i+1}}"
+            title="{{slot.max_patient_count}} Patient in this slot."
+            (click)="showAppForASlot(slot.appointments, i+1, slot)">
+            {{slot.start_time}}
+          </span>
+        </ng-template>
+      </div>
+      <div class="heading" *ngIf="appointments.length != 0">
+        Appointments
+        <div>
+          <button class="btn btn-theme-sm ml-auto" *ngIf="docDeleted" (click)="notifyAll()">Notify</button>
+          <button class="btn btn-theme-sm ml-2" *ngIf="docDeleted" (click)="reschedule()">Reschedule</button>
+        </div>
+      </div>
+      <ul class="app-list">
+        <li class="app-list-item" *ngFor="let app of appointments" (click)="showDetails(app)">
+          <div class="wrapper">
+            <div class="name">{{app.isSelfBooking == false?(app.other_patient_name || '-'):(app.patient.name || '-')}}
+            </div>
+            <div class="time"><span class="material-icons">query_builder</span> {{app.appointment_date}}</div>
+          </div>
+          <div class="token">
+            <div class="text">{{app.token}}</div>
+            <div class="sub-text">Token</div>
+          </div>
+          <div class="logo" *ngIf="app.consultation_type=='Online'">
+            <img src="../../../assets/icons/profile/ONLINE-CONSULTATION.png" alt="" width="100%">
+          </div>
+          <div class="logo" *ngIf="app.consultation_type=='Offline'">
+            <img src="../../../assets/icons/profile/OPD-VISIT.png" alt="" width="100%">
+          </div>
+        </li>
+      </ul>
+
+      <!-- <p class="text-center text-small" *ngIf="appointments.length == 0">Select slot to view appointments.</p> -->
+    </div>
+
+  </div>
+</div>

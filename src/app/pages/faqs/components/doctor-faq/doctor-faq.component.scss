@@ -1,0 +1,59 @@
+.faqs-doc{
+    padding: 0rem 1.5rem;
+}
+.faqs-doc .heading .primary{
+    font-size: 1.5rem;
+    padding-bottom: 0.4rem;
+    color: #091921;
+    span{
+        margin-left: 1rem;
+        font-size: 0.8rem;
+        color: #687477;
+    }
+}
+.title{
+    font-size: 1.1rem;
+}
+.topics-list{
+    list-style: none;
+    padding: 0;
+}
+
+.topics-list .topics-list-items{
+    padding: 0.5rem 0rem;
+}
+.topics-list .topics-list-items:hover{
+    cursor: pointer;
+}
+
+.active-tab{
+    background-color: #005c66 !important;
+    color: white !important;
+    .material-icons{
+        transition: all ease .2s;
+        transform: rotate(180deg);
+    }
+}
+
+
+.btn-link{
+    box-shadow: none;
+    color: #005c66;
+    box-shadow: 0 0.1rem 0.6rem #ebf5f7;
+    text-decoration: none;
+    background-color: white;
+    display: flex;
+    padding: 1rem 0.8rem;
+    justify-content: space-between;
+}
+.material-icons{
+    margin-top: 4px;
+    transition: all ease .2s;
+}
+
+.f-card{
+    margin-bottom: 1rem;
+}
+.card-body{
+    background: #ebf5f7;
+}

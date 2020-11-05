@@ -1,0 +1,7 @@
+[0612/120112.714:ERROR:crash_report_database_win.cc(580)] CreateDirectory C:\Users\Public\Documents\Google\Chrome: The system cannot find the path specified. (0x3)
+[0612/120112.799:ERROR:registration_protocol_win.cc(131)] TransactNamedPipe: The pipe has been ended. (0x6D)
+[0612/120112.799:ERROR:crash_report_database_win.cc(580)] CreateDirectory C:\Users\Public\Documents\Google\Chrome: The system cannot find the path specified. (0x3)
+[0612/121514.705:ERROR:crash_report_database_win.cc(580)] CreateDirectory C:\Users\Public\Documents\Google\Chrome: The system cannot find the path specified. (0x3)
+[0612/121514.721:ERROR:registration_protocol_win.cc(131)] TransactNamedPipe: The pipe has been ended. (0x6D)
+[0612/121514.721:ERROR:crash_report_database_win.cc(580)] CreateDirectory C:\Users\Public\Documents\Google\Chrome: The system cannot find the path specified. (0x3)
+[1102/155316.883:ERROR:appcenter_api.cc(52)] expecting appcenter url prefix

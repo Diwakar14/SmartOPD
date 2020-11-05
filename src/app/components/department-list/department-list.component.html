@@ -1,0 +1,43 @@
+<div class="departments">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="heading">
+                <div class="primary">
+                    All Departments
+                    <span>Dashboard / All Departments</span>
+                </div>
+                <div class="secondary">
+                    <div class="inputBox">
+                        <input type="search" (keyup)="search($event)" class="searchInput" placeholder="Search by department" />
+                        <button class="search">
+                          <span class="material-icons">
+                          search
+                          </span>
+                        </button>
+                    </div>
+                    <!-- <button class="btn btn-primary btn-sm ml-2" (click)="openDialog()">Add New Department</button> -->
+                </div>
+              </div>
+        </div>
+    </div>
+    
+    <br>
+    <div class="department-list">
+        <div class="blocker" *ngIf="loading">
+            <img src="../../../assets/icons/ring.svg" width="40px" alt="">
+        </div>
+        <div class="list">
+            <div class="card" *ngFor="let dept of filteredDepartment">
+                <div class="card-image">
+                    <img src="{{dept.photo}}" width="100%" alt="">
+                </div>
+                <div class="card-heading">{{dept.name}}</div>
+                <div class="card-body pt-1">
+                    <div class="count color-accent">{{dept.doctor_count}} Doctors</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  

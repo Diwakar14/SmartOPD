@@ -1,0 +1,37 @@
+<div class="docProfile">
+    <div class="heading">
+        <div class="primary">
+            Doctor Profile
+            <span>Dashboard / Doctor Profile</span>
+        </div>
+    </div>
+    <p *ngIf="doctorData && !doctorData.doctor.doctor_detail.isActive" 
+    class="alert alert-danger text-center my-2">This doctor is not active</p>
+    <br>
+    <div class="row">
+        <div class="col-md-6 col-lg-4">
+            <app-doc-basic-profile [doctorId]="doctorId" [doctorData]="doctorData" *ngIf="doctorData" (change)="reload($event)"></app-doc-basic-profile>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <app-add-slot [doctorId]="doctorId"  [origin]="'docProfile'" [active]="doctorData.doctor" *ngIf="doctorData"></app-add-slot>
+            <app-holiday-doctor [doctorId]="doctorId" [active]="doctorData.doctor"  *ngIf="doctorData"></app-holiday-doctor>
+        </div>
+        <div class="col-md-12 col-lg-4">
+            <app-appointments [doctorId]="doctorId" [active]="doctorData.doctor"  *ngIf="doctorData"></app-appointments>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="col-md-8 col-lg-8"> -->
+            
+            <!-- <div class="row">
+                <div class="col-md-12">
+                    <app-chart-card [chartId]="1"></app-chart-card>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <app-chart-card [chartId]="2"></app-chart-card>
+                </div>
+            </div> -->
+        <!-- </div> -->

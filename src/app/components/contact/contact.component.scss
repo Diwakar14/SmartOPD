@@ -1,0 +1,29 @@
+.contact{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.contact-list{
+    text-align: center;
+}
+.accent-color{
+    color: #089eae;
+    font-size: 1.1rem;
+}
+
+a{
+    color: #595959 !important;
+}
+a:hover{
+    text-decoration: underline;
+}
+.credit{
+    font-size: 0.9rem;
+    color: #595959;
+}
+
+@media(max-width:768px){
+    .contact-list{
+        margin-top: 2rem;
+    }   
+}

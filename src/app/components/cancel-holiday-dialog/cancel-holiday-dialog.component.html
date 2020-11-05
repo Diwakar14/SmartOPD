@@ -1,0 +1,13 @@
+<div class="alert">
+  <h2 mat-dialog-title>Charnock SmartOPD</h2>
+  <mat-dialog-content class="mat-typography p-0">
+    <h4>Are you sure you want to cancel holiday from {{start|date}} to {{end|date}} ?</h4>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button class="btn" mat-dialog-close>Cancel</button>
+    <button (click)="confirm()" [disabled]="loading" class="btn btn-theme-sm" cdkFocusInitial>
+      Confirm Cancel
+      <img src="../../../assets/icons/ring.svg" *ngIf="loading" width="20px" alt="">
+    </button>
+  </mat-dialog-actions>
+</div>

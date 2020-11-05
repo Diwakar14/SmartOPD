@@ -1,0 +1,65 @@
+<div class="allDoctor">
+  <div class="header">
+    <div class="primary">
+      <span class="title">All Doctors</span>
+      <span class="breadcrum">Dashboard / All Doctors</span>
+    </div>
+    <div class="secondary d-flex">
+      <div class="inputBox">
+        <input 
+          type="search" 
+          class="searchInput" 
+          #searchDoctor
+          placeholder="Search by name, designation and department" />
+        <button class="search">
+          <span class="material-icons color-accent">
+          search
+          </span>
+        </button>
+      </div>
+      <button class="btn btn-theme-sm ml-2" routerLink="/dashboard/doctor/add" *ngIf="role == 'Admin'">New Doctor</button>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="blocker" *ngIf="loading">
+      <img src="../../../assets/icons/ring.svg" width="40px" alt="">
+    </div>
+    <p  *ngIf="filteredDoctors.length==0" class="text-center p-3">No Doctor Found for '<i>{{search_field}}</i>'</p>
+    <div class="dept" *ngFor="let dept of filteredDoctors">
+      <span class="heading">
+        <img src="{{dept.icon}}" alt="logo" class="logo">
+        <span>{{dept.name}}</span>
+      </span>
+      <div class="card" *ngIf="dept.doctors.length == 0">
+        <div class="card-body text-center">
+          <h5 class="text-light-b">No doctors in this department</h5>
+        </div>
+      </div>
+      <div class="doc-list" >
+        <div class="card" *ngFor="let doc of dept.doctors; even as isEven" routerLink="/dashboard/doctor/{{doc.doctor_id}}">
+         
+          <div class="card-image">
+            <img src="{{doc.doctor.photo==null?'../../../assets/icons/favIcon.png':doc.doctor.photo}}" alt="img" width="100%">
+          </div>
+          <div class="card-body">
+            <div class="doc-name" >
+              {{ doc.doctor.name }}
+            </div>
+            <div class="doc-deg">
+              {{doc.designation}}
+            </div>
+            <div class="doc-quali">
+              <span class="quali-chip" *ngFor="let quali of doc.qualifications">
+                {{quali}}
+              </span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+    
+  </div>
+</div>

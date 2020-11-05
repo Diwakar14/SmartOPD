@@ -1,0 +1,178 @@
+.doctor-profile {
+    margin-top: -70px;
+    margin-left: auto;
+    margin-right: auto;
+    background: white;
+    border-radius: 5rem;
+    width:130px;
+    height:130px;
+    overflow: hidden;
+}
+
+.iq-card{
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    position: relative;
+    background: white;
+    box-shadow: 0 0.2rem 0.5rem rgba(43, 95, 124, 0.1);
+}
+.card:hover{
+    transition: all ease .2s;
+    box-shadow: 0 0.2rem 0.8rem rgba(43, 95, 124, 0.1);
+}
+.doc-profile-bg{
+    background: url('../../../assets/icons/profile-page-header.png') top right no-repeat;
+    background-size: 50%;
+}
+.name{
+    font-weight: 400 !important;
+    font-size: 1rem;
+    color: #091921;
+    margin-bottom: 0;
+    &:hover .edit{
+        display: initial;
+    }
+    .edit{
+        display: initial;
+        cursor: pointer;
+    }
+}
+.remove{
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #008389;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    text-transform: uppercase;
+}
+.remove .action:hover{
+    color: #091921;
+    cursor: pointer;
+}
+.remove .action:active{
+    background-color: #daf0f2;
+    cursor: pointer;
+}
+
+.desig{
+    font-size: 0.9rem;
+    color: #008389;
+    margin-bottom: 0;
+}
+.small{
+    color: #545454;
+    font-size:0.9rem;
+    padding-top: 0.4rem;
+    display: inline-block;
+}
+
+ul.doctoe-sedual li {
+    list-style: none;
+    flex: 1;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    line-height: 1.4rem;
+    &:first-child{
+        border-left: none;
+    }
+    h3{
+        color: #008389;
+        line-height: unset;
+        margin-bottom: 0;
+        font-size: 1.2rem;
+    }
+    span{
+        font-size: 0.8rem;
+        color: #545454;
+    }
+}
+
+.heading{
+    color: #008389;
+    font-size: 14px;
+    margin-bottom: 1rem;
+    &:hover .edit{
+        display: initial;
+    }
+    .edit{
+        display: initial;
+        cursor: pointer;
+    }
+}
+.blocker{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    background: rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper{
+    display: flex;
+    margin-bottom: 1.2rem;
+    .primary{
+        display: flex;
+        .logo{
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem;
+            margin-right: 0.5rem;
+            border-radius: 2rem;
+            background: #daf0f2;
+        }
+    }
+    .secondary{
+        display: flex;
+        .logo{
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem;
+            margin-right: 0.5rem;
+            border-radius: 2rem;
+            background: #daf0f2;
+        }
+    }
+}
+
+.content .title{
+    font-size: 0.8rem;
+    color: #545454;
+}
+
+.fees_info{
+    padding: 1rem;
+}
+
+.medical_info{
+    padding: 1rem;
+}
+
+.contact_info{
+    padding: 1rem;
+}
+
+
+@media(min-width:1500px){
+    .fees_info{
+        margin: 0 2rem;
+    }
+    
+    .medical_info{
+        margin: 0 2rem;
+    }
+    
+    .contact_info{
+        margin: 0 2rem;
+    }
+}

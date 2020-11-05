@@ -1,0 +1,220 @@
+<div class="add-doctor">
+    <div class="heading">
+        <div class="primary">
+            Add Doctor
+            <span>Dashboard / Add Doctor</span>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-6 col-lg-4">
+            <div class="card p-0">
+                <div class="card-title p-2">
+                    Basic Information
+                </div>
+                <div class="uploadImage">
+                    <div class="file-wrapper" id="image-preview" [style.background]="photoPreview">
+                        <!-- <label id="image-label">Upload Image</label> -->
+                        <input type="file" id="image-upload" class="photo"
+                         (change)="fileChangeEvent($event)" #photo name="photo" accept="image/jpeg, image/png" />
+                    </div>
+                    <div class="cropper" *ngIf="crop">
+                        <image-cropper
+                            [imageChangedEvent]="imageChangedEvent"
+                            [maintainAspectRatio]="true"
+                            [aspectRatio]="2 / 3"
+                            format="png"
+                            (imageCropped)="imageCropped($event)"
+                            (imageLoaded)="imageLoaded()"
+                            (cropperReady)="cropperReady()"
+                            (loadImageFailed)="loadImageFailed()"
+                        ></image-cropper>
+                        <div class="d-flex justify-content-center mb-2">
+                            <button class="btn btn-theme-sm d-block mt-2" (click)="cropped()">OK</button>
+                            <button class="btn ml-2 mt-2" (click)="cancelCrop()">Cancel</button>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="uploadBtn text-center">
+                    <span class="sub-text">only png,jpeg and jpg is allowed</span>
+                </div>
+                <form #f="ngForm" (ngSubmit)="addBasic(f)" class="p-3">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="">Name</label>
+                                <input type="text" [(ngModel)]="basicInfo.name" class="form-control" name="first_name" required>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">D.O.B</label>
+                                <input type="date" [(ngModel)]="basicInfo.dob" class="form-control" name="dob">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Gender</label>
+                                <select name="gender" class="form-control" [(ngModel)]="basicInfo.gender">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Others">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                   <div class="row">
+                       <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="">Designation</label>
+                            <input type="text" [(ngModel)]="basicInfo.designation" class="form-control" name="designation" required>
+                        </div>
+                       </div>
+                   </div>
+                   <div class="row">
+                       <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Department</label>
+                            <select class="form-control" [(ngModel)]="basicInfo.department" required name="department">
+                                <option *ngFor="let dept of departments" value="{{dept.id}}">{{dept.name}}</option>
+                            </select>
+                        </div>
+                       </div>
+                   </div>
+
+                   <div class="row">
+                       <div class="col-md-6 col-lg-6">
+                            <label for="">Online Fees</label>
+                            <input type="text" maxlength="5" [(ngModel)]="basicInfo.online_fees" class="form-control" name="online_fees" >
+                       </div>
+                       <div class="col-md-6 col-lg-6">
+                            <label for="">Offline Fees</label>
+                            <input type="text" maxlength="5" [(ngModel)]="basicInfo.offline_fees" class="form-control" name="offline_fees">
+                       </div>
+                   </div>
+
+                   <div class="form-group">
+                    <button type="submit" class="btn btn-theme-sm mt-4 ml-auto mr-auto d-block" [disabled]="!f.valid || submit">
+                        Submit
+                        <span class="ml-2" *ngIf="loadingInfo"><img src="../../../assets/icons/ring.svg" width="20px" alt=""></span>
+                    </button>
+                   </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card p-0">
+                <div class="card-title p-2">
+                    Medical Information
+                </div>
+                <form #medical="ngForm" class="mt-0 p-3" (ngSubmit)="addMedicalInfo(medical)">
+                    <div class="form-group">
+                        <label for="">Qualification</label>
+                        <textarea type="text" class="form-control" [(ngModel)]="medicalInfo.qualifications" name="Qualification"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Specialization</label>
+                        <textarea type="text" class="form-control" [(ngModel)]="medicalInfo.specializations" name="specialization"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Experience</label>
+                                <input type="text" maxlength="2" class="form-control" [(ngModel)]="medicalInfo.experience" name="experience" >
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <div class="form-group">
+                        <button type="submit" [disabled]="disableMedical" class="btn btn-theme-sm">
+                            Submit
+                            <span class="ml-2" *ngIf="loadingMedical"><img src="../../../assets/icons/ring.svg" width="20px" alt=""></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="card p-0">
+                <div class="card-title p-2">
+                   Contact Information
+                </div>
+                
+                <form #contact="ngForm" class="mt-0 p-3" (ngSubmit)="addContactInfo(contact)">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Phone Number</label>
+                                <input type="text" minlength="10" maxlength="10" class="form-control" #phone="ngModel" (change)="checkUniqueness(phone)" [(ngModel)]="contactInfo.phone" name="phone">
+                                <small *ngIf="phoneUniqueErrors" >Checking...</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Whatapp Number</label>
+                                <input type="text" maxlength="10" class="form-control" [(ngModel)]="contactInfo.whatsapp_number" name="whatsapp_number">
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="phone_what" [(ngModel)]="contactInfo.isPhone" (change)="checkPhone()" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">
+                                  Same for Whatapp
+                                </label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Email</label>
+                        <input type="text" class="form-control" name="email" placeholder="your@email.com" [(ngModel)]="contactInfo.email">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Street Address 1</label>
+                                <input type="text" class="form-control" name="add1" [(ngModel)]="contactInfo.add1">
+                            </div>
+                            
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Street Address 2</label>
+                                <input type="text" class="form-control" name="add2" [(ngModel)]="contactInfo.add2">
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Town/City</label>
+                                <input type="text" class="form-control" name="city" [(ngModel)]="contactInfo.city">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Country</label>
+                                <input type="text" class="form-control" name="country" [(ngModel)]="contactInfo.country">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button [disabled]="disableContact || (!contact.valid)" class="btn btn-theme-sm">
+                            Submit
+                            <span class="ml-2" *ngIf="loadingContact">
+                                <img src="../../../assets/icons/ring.svg" width="20px" alt="">
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+            <app-add-slot [origin]="'addDoc'"></app-add-slot>
+        </div>
+    </div>
+</div>

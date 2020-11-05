@@ -1,0 +1,101 @@
+.add-doctor{
+    padding: 0 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.btn-outline-primary{
+    border-radius: 1rem;
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+    color: #005c66;
+    border-color: #005c66;
+}
+.btn-outline-primary:hover{
+    color: #fff;
+    background: #005c66;
+}
+
+.add-doctor .heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid rgba(204, 204, 204, 0.5);
+}
+.add-doctor .heading .primary{
+    font-size: 1.5rem;
+    span{
+        margin-left: 1rem;
+        font-size: 0.8rem;
+        color: #687477;
+    }
+}
+.add-doctor .heading .secondary{
+    font-size: 1.5rem;
+    padding-bottom: 0.5rem;
+}
+.form-control{
+    font-size: 16px;
+    padding: 0;
+}
+
+label{
+    margin-bottom: 0;
+}
+
+.card-title{
+    border-bottom: 1px solid rgba(204, 204, 204, 0.5);
+}
+.sub-text{
+    font-size: 0.7rem;
+}
+.file-wrapper{
+    width: 8rem;
+    height: 8rem;
+    background: url('../../../assets/icons/favIcon.png') center no-repeat;
+    background-size: cover !important;
+    border-radius: 999px;
+    margin: auto;
+    position: relative;
+    label{
+      display: inline-block;
+      margin-bottom: .5rem;
+      top: 55px;
+      left: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: black;
+      position: absolute;
+    }
+    .photo{
+      width: 8rem;
+      height: 8rem;
+      border-radius: 999px;
+      opacity: 0;
+    }
+  }
+
+  .full-width{
+      width: 100%;
+  }
+
+  .blocker{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+image-cropper{
+    padding: 3rem;
+}
+@media(min-width:1500px){
+    .add-doctor{
+        padding: 2rem 8rem;
+    }
+}

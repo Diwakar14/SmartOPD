@@ -1,0 +1,24 @@
+.createDept{
+    padding: 2rem;
+    font-family: 'Maven Pro', sans-serif;
+}
+
+h2{
+    font-family: 'Maven Pro', sans-serif;
+}
+mat-label{
+    font-family: 'Maven Pro', sans-serif;
+}
+.full-width{
+    width: 100%;
+}
+
+.mat-dialog-actions {
+    padding: 0px;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    min-height: unset;
+    align-items: center;
+    margin-bottom: unset;
+}

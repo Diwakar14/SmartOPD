@@ -1,0 +1,296 @@
+<div class="book-appointment">
+    <div class="blocker highest" [hidden]="!loading" style="background: rgba(255, 255, 255, 0.548);">
+        <img src="../../../assets/icons/ring.svg" width="40px" alt="">
+    </div>
+    <div class="heading border-bottom">
+        <div class="primary">
+            Book Appointments
+            <span>Home / Appointments / Book Appointment</span>
+        </div>
+    </div>
+    <div class="blocker higher" [hidden]="!confirm">
+        <img src="../../../assets/icons/ring.svg" width="40px" alt="">
+    </div>
+    <div class="stepper-container">
+        <div class="search full-width">
+            <div class="card-no line-v line-h" [class.activeStep]="step1">
+                01
+            </div>
+            <br>
+            <div class="card card-height-small overflow-none">
+                <div class="card-title">
+                    Doctor
+                </div>
+                <div class="card-body">
+                    <div class="inputBox">
+                        <input type="search" id="searchDoc" #searchDoctorApp autocomplete="off" class="searchInput"
+                            placeholder="Search by name, designation, department" />
+                        <button class="search">
+                            <span class="material-icons" [hidden]="loadingSearchDataDoc">
+                                search
+                            </span>
+                            <span [hidden]="!loadingSearchDataDoc">
+                                <img src="../../../assets/icons/ring.svg" width="20px" alt="">
+                            </span>
+                        </button>
+                    </div>
+                    <div class="search-output zIndex13">
+                        <ng-template ngFor let-dept [ngForOf]="filteredDoctors" let-docI="index">
+                            <div class="doc-card jsDocCard d-flex" *ngFor="let doc of dept.doctors;"
+                                (click)="selectCard(doc)">
+                                <div class="logo">
+                                    <img src="{{doc.doctor.photo==null?'../../../assets/icons/doctor_grey.png':doc.doctor.photo}}"
+                                        alt="" width="100%">
+                                </div>
+                                <div class="content ml-2">
+                                    <div class="name">{{doc.doctor.name}}</div>
+                                    <div class="desig">{{doc.designation}}</div>
+                                </div>
+                            </div>
+                        </ng-template>
+
+                    </div>
+                    <div class="doc-card shadow-sm selectedCard d-flex mt-4" *ngIf="selectedDocCard.isSelected">
+                        <div class="logo">
+                            <img src="{{selectedDocCard.photo==null?'../../../assets/icons/doctor_grey.png':selectedDocCard.photo}}"
+                                alt="" width="100%">
+                        </div>
+                        <div class="content ml-2">
+                            <div class="name">{{selectedDocCard.name}}</div>
+                            <div class="desig">{{selectedDocCard.designation}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-height-small overflow-none">
+                <div class="header">
+                    <div class="card-title d-flex">
+                        Patient
+                        <button class="btn btn-theme-sm ml-auto" (click)="addPatient()">New Patient</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="inputBox">
+                        <input type="search" id="searchPat" #searchPatientApp autocomplete="off" class="searchInput"
+                            placeholder="Search by patinet name" />
+                        <button class="search">
+                            <span class="material-icons" [hidden]="loadingSearchDataPat">search</span>
+                            <span [hidden]="!loadingSearchDataPat">
+                                <img src="../../../assets/icons/ring.svg" width="20px" alt="">
+                            </span>
+                        </button>
+                    </div>
+                    <div class="search-output zIndex12">
+                        <div class="doc-card jsPatCard d-flex" *ngFor="let pat of filteredPatient;"
+                            (click)="selectPatient(pat)">
+                            <div class="logo">
+                                <img src="{{pat.photo==null?'../../../assets/icons/doctor_grey.png':pat.photo}}" alt=""
+                                    width="100%">
+                            </div>
+                            <div class="content ml-2">
+                                <div class="name">{{pat.name}}</div>
+                                <div class="desig">{{pat.phone}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="doc-card shadow-sm selectedCard d-flex mt-4" *ngIf="selectedPatCard.isSelected">
+                        <div class="logo">
+                            <img src="{{selectedPatCard.photo==null?'../../../assets/icons/doctor_grey.png':selectedPatCard.photo}}"
+                                alt="" width="100%">
+                        </div>
+                        <div class="content ml-2">
+                            <div class="name">{{selectedPatCard.name}}</div>
+                            <div class="desig">{{selectedPatCard.phone || '-'}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="select-slot full-width ">
+            <div class="card-no line-v line-h" [class.activeStep]="!step2">
+                02
+            </div>
+            <br>
+            <div class="card card-height-big">
+                <div class="loader-blocker blocker" [hidden]="!loadingslots">
+                    <img src="../../../assets/icons/ring.svg" width="40px" alt="">
+                </div>
+                <div class="blocker" [hidden]="!blocker.slot">
+                    <div class="logo">
+                        <img src="../../../assets/img/book/book-appointment-1.png" width="80%" alt="">
+                    </div>
+                    <ul class="text-left list-items">
+                        <li>Select Doctor</li>
+                    </ul>
+                </div>
+                <div class="card-title">
+                    Slot
+                </div>
+                <div class="card-body pt-0" data-scrollbar>
+                    <div class="tab">
+                        <div class="tab-nav owl-carousel">
+                            <div class="tab-item" *ngFor="let app of appointmentDates; index as i" id="date_{{i+1}}"
+                                [class.activeDate]="i==0" (click)="showBookings(app, i+1)">
+                                <div class="tab-nav-link">
+                                    <strong>{{app.date|date:'EEE'|uppercase}}</strong>
+                                    <span class="dates">{{app.date|date:'dd'|uppercase}}</span>
+                                    <span class="month">{{app.date|date:'MMM'|uppercase}}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <br><br>
+                    <div class="heading">
+                        <div class="logo">
+                            <img src="../../../assets/icons/profile/OPD-VISIT.png" width="100%" alt="">
+                        </div>
+                        <div class="title">OPD Visit</div>
+                        <div class="price">{{offline_fees==null?'-':'Rs.' +offline_fees}}</div>
+                    </div>
+                    <div class="slot-wrapper">
+                        <div class="slot" *ngFor="let slot of offline; index as i" id="slot_{{i}}"
+                            (click)="selectedSlot(slot, i, 2)">
+                            {{slot.start|uppercase}}
+                        </div>
+                        <p class="text-center d-block text-light-b w-100" *ngIf="offline.length == 0">No Slots</p>
+                    </div>
+                    <br><br>
+                    <div class="heading">
+                        <div class="logo">
+                            <img src="../../../assets/icons/profile/ONLINE-CONSULTATION.png" width="100%" alt="">
+                        </div>
+                        <div class="title">Online Consulation</div>
+                        <div class="price"> {{online_fees==null?'-':'Rs.' +online_fees}}</div>
+                    </div>
+                    <!-- Apply on slot to enable ->  (click)="selectedSlot(slot, offline.length + i, 1)" -->
+                    <!-- Apply on slot to enable ->  id="slot_{{offline.length + i}}" -->
+                    <div class="slot-wrapper">
+                        <!-- Apply disabled class to disable slot -->
+                        <div class="slot" *ngFor="let slot of online; index as i" id="slot_{{offline.length + i}}"
+                            (click)="selectedSlot(slot, offline.length + i, 1)"
+                            title="{{slot.available_seats}} Patients">
+                            {{slot.start|uppercase}}
+                        </div>
+
+                        <p class="text-center d-block text-light-b w-100" *ngIf="online.length == 0">No Slots</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="confirm full-width">
+            <div class="card-no line-v" [class.activeStep]="!step3">
+                03
+            </div>
+            <br>
+            <div class="card card-height-big">
+                <div class="blocker animate__animated animate__faster" [hidden]="!blocker.confirm">
+                    <div class="logo">
+                        <img src="../../../assets/img/book/book-appointment-2.png" width="80%" alt="">
+                    </div>
+                    <ul class="text-left list-items">
+                        <li *ngIf="info.doctor">Select Doctor</li>
+                        <li *ngIf="info.patient">Select Patient</li>
+                        <li *ngIf="info.date">Select Date</li>
+                        <li *ngIf="info.slot">& Select Slot</li>
+                    </ul>
+                </div>
+                <div class="card-title">
+                    Confirm Appointment
+                </div>
+                <div class="card-body" *ngIf="doctor">
+                    <div class="doc-details">
+                        <div class="photo">
+                            <img src="{{doctor.doctor.photo==null?'../../../assets/icons/doctor_grey.png':doctor.doctor.photo}}"
+                                alt="" width="100%">
+                        </div>
+                        <div class="name">{{doctor.doctor.name || '-'}}</div>
+                    </div>
+                    <div class="slot-booked mt-4" *ngIf="slot">
+                        <div class="d-flex">
+                            <div class="logo">
+                                <img src="{{slot.type=='Online'?'../../../assets/icons/profile/ONLINE-CONSULTATION.png':'../../../assets/icons/profile/OPD-VISIT.png'}}"
+                                    width="100%" alt="">
+                            </div>
+                            <div class="content">
+                                <h6>{{slot.type=='Offline'?'OPD Visit':'Online Consultation'}} </h6>
+                                <small>{{slot.date|date}}</small>
+                            </div>
+                        </div>
+                        <div class="time">{{slot.start}}</div>
+                    </div>
+                    <div class="fees mt-5" *ngIf="patient">
+                        <div class="div">
+                            <small>Book For</small>
+                            <h5>{{patient.name}}</h5>
+                        </div>
+                        <div class="div d-flex mt-3">
+                            <small class="">Ref.ID</small>
+                            <div class="ml-auto">{{patient.ref_id}}</div>
+                        </div>
+                    </div>
+                    <div class="fees d-flex mt-4">
+                        <small>Total Consultation Fees</small>
+                        <span class="ml-auto"
+                            *ngIf="slot.type=='Online'">{{online_fees==null?'-':'Rs.' +online_fees}}</span>
+                        <span class="ml-auto"
+                            *ngIf="slot.type=='Offline'">{{offline_fees==null?'-':'Rs.' +offline_fees}}</span>
+                    </div>
+                    <button class="btn btn-theme btn-block mt-5" [disabled]="confirm"
+                        (click)="confirmBook()">CONFIRM</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="contentToConvertFromApp" *ngIf="confirmBooking">
+    <title>Charnock SmartOPD</title>
+    <div style="width: 604.7px; display: block; margin: auto; font-family: arial; font-size: 14px;">
+        <header style="height: 48.8px;"></header>
+        <div style="height: 574.4px;position: relative;">
+            <div style="left: 11.3px; top: 22.33px; width: 283.4px; height: 56.6px; position: absolute;">
+                <div style="left: 85; top: 2px; position: relative;">{{confirmBooking.patient.ref_id || '-'}} </div>
+                <div style="left: 85; top: 5px; position: relative;" *ngIf="confirmBooking.isSelfBooking">
+                    {{confirmBooking.patient.name || '-'}}</div>
+                <div style="left: 85; top: 5px; position: relative;" *ngIf="!confirmBooking.isSelfBooking">
+                    {{confirmBooking.other_patient_name==null?'-':confirmBooking.other_patient_name}}</div>
+                <div style="left: 85; top: 7px; position: relative;">
+                    {{confirmBooking.patient.age || confirmBooking.patient.dob || '-'}} /
+                    {{confirmBooking.patient.gender || '-'}}</div>
+            </div>
+            <div style="left: 306.1px; top: 22.33px; width: 283.4px; height: 56.6px; position: absolute;">
+                <div style="left: 65.3; top: 2px; position: relative; ">{{confirmBooking.doctor.name || '-'}} </div>
+                <div style="left: 65.3; top: 5px; position: relative;">-</div>
+                <div style="left: 65.3; top: 7px; position: relative;">
+                    {{confirmBooking.appointment_date == null ? '-' : confirmBooking.appointment_date|date:'shortTime'}}
+                </div>
+            </div>
+            <div style="height:442.2px; left: 11.3px; width: 579px; top: 79.5px;position: absolute;">
+                <div style="left: 11px; top: 14px; position: relative;">Booking Id: <b
+                        style="font-size: 16px;">{{confirmBooking.booking_id || '-'}}</b> </div>
+                <div style="left: 250px; top: 14px; position: absolute;">App. Date: <b style="font-size: 16px;">
+                        {{confirmBooking.appointment_date == null ? '-' : confirmBooking.appointment_date}} </b></div>
+                <div style="right: 11px; top: 14px; position: absolute;" *ngIf="!current_token">Token: <b
+                        style="font-size: 16px;">{{confirmBooking.token || '-'}} </b></div>
+                <div style="right: 11px; top: 14px; position: absolute;" *ngIf="current_token">Token: <b
+                        style="font-size: 16px;">{{current_token || '-'}} </b></div>
+                <div style="left: 11px; bottom: 11px; position: absolute;">
+                    <span style="border: 1px solid; border-radius: 3px; padding: 3px 5px;"
+                        *ngIf="confirmBooking.consultation_type">
+                        <b>{{confirmBooking.consultation_type || '-'}} Consultation</b>
+                    </span>
+                </div>
+                <!-- <div style="left: 220px; bottom: 11px; position: absolute;">
+                    Reporting Time: <b style="font-size: 16px;"> {{confirmBooking.approx_time== null?(confirmBooking.appointment_date|date:'shortTime'):confirmBooking.approx_time}}</b>
+                </div> -->
+                <div style="right: 11px; bottom: 11px; position: absolute;">
+                    Fees: <b style="font-size: 16px;"> Rs. {{consultation_fees || '-'}} </b>
+                </div>
+            </div>
+            <div style="height: 30.26px; left: 11.3px; width: 579px; top: 532.1px; position: absolute;">
+
+            </div>
+        </div>
+    </div>
+</div>

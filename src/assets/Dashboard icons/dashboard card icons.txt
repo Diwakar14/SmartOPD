@@ -1,0 +1,6 @@
+Department card icons and font colours
+
+patient - #be1622
+doctor - #006f9b
+staff - #1ed2e3
+department - #ff8a3b

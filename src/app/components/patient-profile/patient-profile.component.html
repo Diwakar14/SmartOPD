@@ -1,0 +1,232 @@
+<div class="pat-profile">
+    <div class="heading">
+        <div class="primary">
+            Patient Profile
+            <span>Dashboard / Patient Profile</span>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4 col-lg-4">
+            <div class="iq-card" *ngIf="patient">
+                <div class="blocker" [hidden]="!loadingProfile">
+                    <img src="../../../assets/icons/ring.svg" width="40px" alt="">
+                </div>
+                <div class="iq-card-body pl-0 pr-0 pt-0">
+                    <div class="doctor-details-block">
+                        <div class="doc-profile-bg bg-primary" style="height:150px;">
+                        </div>
+                        <div class="doctor-profile text-center">
+                            <img src="{{patient.photo==null?'../../../assets/icons/favIcon.png':patient.photo}}" alt="profile-img"
+                                class="avatar-130 img-fluid">
+                        </div>
+                        <div class="text-center mt-3 pl-3 pr-3">
+                            <h5 class="name">
+                                {{patient.name}}
+                                <span class="material-icons edit" *ngIf="role == 'Admin'" style="cursor: pointer;" (click)="editBasic()">edit</span>
+                            </h5>
+                        </div>
+                        <hr>
+                        <ul class="doctoe-sedual d-flex align-items-center justify-content-between p-0 m-0">
+                            <li class="text-center">
+                                <h3 class="counter">{{patient.phone==null?'-':patient.phone}}</h3>
+                                <span>Phone Number</span>
+                            </li>
+                            <li class="text-center">
+                                <h3 class="counter">{{patient.ref_id==null?'-':patient.ref_id}}</h3>
+                                <span>Ref.ID </span>
+                            </li>
+                        </ul>
+                        <hr>
+                        <div class="fees_info">
+                            <div class="wrapper">
+                                <div class="primary">
+                                    <div class="logo">
+                                        <img src="../../../assets/icons/profile/DOB.png" alt="" width="100%">
+                                    </div>
+                                    <div class="content">
+                                        <div class="title">D.O.B </div>
+                                        <div class="sub-title">{{patient.dob==null?'-':patient.dob}}</div>
+                                    </div>
+                                </div>
+                                <div class="secondary">
+                                    <div class="logo">
+                                        <img src="../../../assets/icons/profile/GENDER.png" alt="" width="100%">
+                                    </div>
+                                    <div class="content">
+                                        <div class="title">Gender </div>
+                                        <div class="sub-title">{{patient.gender==null?'-':patient.gender}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-0">
+                <div class="blocker" [hidden]="!loadingMedicalDoc">
+                    <img src="../../../assets/icons/ring.svg" width="40px" alt="">
+                </div>
+                <div class="card-heading border-bottom p-2">
+                    <div class="card-header-logo">
+                        <img src="../../../assets/icons/profile/MEDICAL DOCS.png" alt="" width="100%">
+                    </div>
+                    <div class="card-title mb-0">
+                        Medical Documents
+                    </div>
+                    
+                </div>
+                <p class="text-center mt-2 text-light-b" *ngIf="patient.medical_documents.length == 0"> No Documents </p>
+                <table class="table table-borderless">
+                    <tbody>
+                      <tr *ngFor="let document of patient.medical_documents">
+                        <td width="5%">
+                            <img src="../../../assets/icons/profile/MEDICAL DOCS.png" class="rounded" alt="" width="20px">
+                        </td>
+                        <td style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;" (click)="viewDocument(document.id)">
+                            <a class="table-wrapper" *ngIf="role != 'Admin'">
+                                {{document.name}}
+                            </a>
+                            <a 
+                                class="table-wrapper" 
+                                *ngIf="role=='Admin'"
+                                #viewDoc 
+                                >
+                                {{document.name}}
+                            </a>
+                        </td>
+                        <td width="10%">
+                            <span class="accent-color" style="white-space: nowrap;">{{document.last_updated}}</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-8 col-lg-8">
+            <div class="row">
+                <div class="col-md-3 col-lg-3">
+                    <div class="card card-height custom-card">
+                        <div class="card-heading marginTop35">
+                            Pressure
+                        </div>
+                        <div class="card-logo ml-auto">
+                            <img src="../../../assets/icons/profile/BLOOD-PRESSURE.png" alt="" width="100%">
+                        </div>
+                        <div class="card-count" style="color: #be1622;">
+                            - mmHG
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3">
+                    <div class="card card-height custom-card">
+                        <div class="card-heading marginTop35">
+                            Heart Rate
+                        </div>
+                        <div class="card-logo">
+                            <img src="../../../assets/icons/profile/HEART-RATE.png" alt="" width="100%">
+                        </div>
+                        <div class="card-count" style="color: #006f9b">
+                            - /min
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3">
+                    <div class="card card-height custom-card">
+                        <div class="card-heading marginTop35">
+                            Cholestrol
+                        </div>
+                        <div class="card-logo">
+                            <img src="../../../assets/icons/profile/CHOLESTROL.png" alt="" width="100%">
+                        </div>
+                        <div class="card-count" style="color: #1ed2e3;">
+                            - mg/dL
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3">
+                    <div class="card card-height custom-card">
+                        <div class="card-heading marginTop35">
+                            Sugar
+                        </div>
+                        <div class="card-logo">
+                            <img src="../../../assets/icons/profile/BLOOD-SUGAR.png" alt="" width="100%">
+                        </div>
+                        <div class="card-count" style="color: #ff8a3b">
+                            - mg/dL
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="card p-0">
+                        <div class="blocker" [hidden]="!loadingAppointments">
+                            <img src="../../../assets/icons/ring.svg" width="40px" alt="">
+                        </div>
+                        <div class="card-heading border-bottom p-2">
+                            <div class="card-header-logo">
+                                <img src="../../../assets/icons/profile/APPOINTMENTS.png" alt="" width="100%">
+                            </div>
+                            <div class="card-title mb-0">
+                                Appointments
+                            </div>
+                            <div class="card-button ml-auto">
+                                <button class="btn btn-theme-sm" routerLink="/dashboard/patient/book/{{patient.id}}">Book Appointment</button>
+                            </div>
+                        </div>
+                        <table class="table table-borderless table-responsive" *ngIf="patient.patient_appointments.length != 0" data-scrollbar>
+                            <thead>
+                              <tr>
+                                <th scope="col" class="text-center" width="5%">Date</th>
+                                <th scope="col" class="text-left" width="10%">Booking Id</th>
+                                <th scope="col" class="text-center" width="10%" style="white-space: wrap;">Type</th>
+                                <th scope="col" width="10%">Doctor</th>
+                                <th scope="col" width="10%" class="text-center">Status</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let pat of patient.patient_appointments" (click)="showDetails(pat)">
+                                <td class="text-center" style="white-space: nowrap;">{{pat.appointment_date|date:'EEE, MMMM d'}}</td>
+                                <td class="text-left">
+                                    {{pat.booking_id==null?'-':pat.booking_id}}
+                                    <div class="text-small color-accent" *ngIf="!pat.isSelfBooking" style="font-weight: 400;">
+                                       For: {{(pat.other_patient_name|slice:0:10) || '-'}}
+                                    </div>
+                                </td>
+                                <td class="text-center accent-color">{{pat.consultation_type|uppercase}}</td>
+                                <td>
+                                    <div class="doc">
+                                        <div class="name text-bold">
+                                            {{pat.doctor.name || '-'}}
+                                        </div>
+                                        <div class="design text-small color-accent" *ngIf="pat.doctor.doctor_detail">
+                                            {{pat.doctor.doctor_detail.designation || '-'}}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <span class="" [class.booked]="pat.status.status == 'Booked'" *ngIf="pat.status.status == 'Booked'">
+                                        BOOKED
+                                    </span>
+                                    <span class="" *ngIf="pat.status.status == 'Cancelled'" [class.cancel]="pat.status.status == 'Cancelled'">
+                                        CANCELLED
+                                    </span>
+                                    <span class="" *ngIf="pat.status.status == 'NoShow'" [class.noShow]="pat.status.status == 'NoShow'">
+                                        NO SHOW
+                                    </span>
+                                    <span class="" [class.completed]="pat.status.status == 'Completed'" *ngIf="pat.status.status == 'Completed'">
+                                        COMPLETED
+                                    </span>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <p *ngIf="patient.patient_appointments.length == 0" class="text-center mt-2 text-light-b">No Upcomming Appointments</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

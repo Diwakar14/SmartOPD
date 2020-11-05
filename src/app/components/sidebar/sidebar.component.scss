@@ -1,0 +1,174 @@
+#wrapper{
+
+}
+.side-navbar{
+    height: 100vh;
+    background: #089eae;
+    box-shadow: 0 0px 8px #0008;
+    color: white;
+    overflow-y: auto;
+    width: 15rem;
+    transition: all ease 0.2s;
+
+}
+.brand{
+    padding-left: 1rem;
+    margin-top: 1rem;
+    color: white !important;
+    display: block;
+    font-size: 1.5rem;
+    padding-right: 1rem;
+}
+.brand img{
+    width: 48px;
+    margin-right: 0.5rem;
+}
+
+.side-navbar .list{
+    list-style: none;
+    padding-left: 0;
+    // height: 100vh;
+    margin-top: 2rem;
+    transition: all ease-in 0.3s;
+}
+.side-navbar .list .list-item{
+    margin-right: 0.8rem;
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+    transition: all ease-in 0.2s;
+    border-radius: 0 1.5rem 1.5rem 0;
+}
+.side-navbar .list .list-item:hover{
+    background: rgba(0, 0, 0, 0.15);
+    transition: all ease-in 0.2s;
+    cursor: pointer;
+}
+
+.side-navbar .list .list-item.active{
+    background: white;
+    border-top-right-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    // box-shadow: 4px 0 16px #00d5e0;
+    color:#005c66;
+}
+.side-navbar .list .list-item.active .head{
+    color: #089eae !important;
+}
+.side-navbar .list .list-item.active .head img{
+    filter: invert(100%);
+    -webkit-filter: invert(100%);
+}
+
+
+.side-navbar .list .list-item .head{
+    display: block;
+    padding: 0.8rem 0;
+    transition: all ease 0.3s;
+    color: white !important;
+    position: relative;
+    font-weight: 400;
+
+}
+
+.side-navbar .list .list-item .head img{
+    width: 16px;
+    margin: 0 2rem;
+}
+
+.side-navbar .list .list-item .head span{
+    font-size: 0.9rem;
+    margin-left: -0.5rem;
+    opacity: 1;
+    transition: all ease-in 0.3s;
+}
+
+.side-navbar-collapsed{
+    width: 5rem;
+    padding-right: 3px;
+    transition: all ease .3;
+}
+.side-navbar-collapsed span{
+    opacity: 0;
+    display: none;
+    transition: all ease .3;
+}
+.side-navbar-collapsed img{
+    width: 24px !important;
+    display: block;
+    margin: auto !important;
+}
+.side-navbar-collapsed .caret{
+    display: none;
+    transition: all ease .3;
+}
+.side-navbar-collapsed .sub-list{
+    display: none;
+    transition: all ease .3;
+}
+.side-navbar-collapsed .list-item{
+    margin-right: 0rem !important;
+}
+
+    .list .sub-list{
+    padding: 0.5rem 0;
+}
+
+.list .sub-list .sub-list-item{
+    padding-left: 0rem;
+    margin-bottom: 0.5rem;
+    margin-right: 1rem;
+    font-size: 0.9rem;
+    list-style: circle;
+}
+.side-navbar .list .sub-list .sub-list-item:hover{
+    border-radius: 0 2rem 2rem 0 !important;
+    background: rgba(0, 0, 0, 0.15);
+    transition: all ease .2s;
+}
+.sub-menu-active{
+    border-radius: 0 2rem 2rem 0 !important;
+    background: rgba(0, 0, 0, 0.15);
+    transition: all ease .2s;
+}
+.side-navbar .list .sub-list .sub-list-item a{
+    padding: 0.5rem !important;
+    color: inherit !important;    
+}
+.side-navbar .list .sub-list .sub-list-item .head img{
+    width: 8px;
+    fill: white;
+    margin-left: 1.8rem;
+}
+.side-navbar .list .sub-list .sub-list-item a span{
+    font-size: 0.8rem !important;
+    margin-left: 0;
+    font-weight: 400;
+    padding-left: 1.7rem !important;
+}
+.side-navbar .list .sub-list .sub-list-item a{
+    display: block;
+}
+
+.collapsed .caret{
+    transition: all ease .3s;
+    transform: rotate(-90deg);
+}
+
+.caret {
+    top: calc(50% - 1px);
+    position: absolute;
+    right: 20px;
+    transition: all ease .3s;
+    transform: rotate(0deg);
+}
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-top: 4px solid\9;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}

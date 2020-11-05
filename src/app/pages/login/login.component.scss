@@ -1,0 +1,82 @@
+#login-area{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+
+}
+#login-area #overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #8883;
+    display: none;
+}
+
+#login-card{
+    align-self: center;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+
+}
+
+.link-group{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    z-index: 5;
+    width: 100%;
+    padding: 0.1rem 0.3rem;
+    .links{
+        a{
+            font-size: 0.75rem;
+            margin-left: 0.6rem;
+            margin-top: 0.5rem;
+        }
+        a:hover{
+            text-decoration: underline;
+            color: #005c66;
+        }
+    }
+}
+
+.login-image{
+    height: 560px;
+    object-fit: cover;
+    z-index: 1;
+    margin-bottom: 4rem;
+
+}
+
+
+#login-card #form-area{
+    flex-basis: 0;
+    height: 450px;
+    flex-grow: 1;
+    background: white;
+    box-shadow: 0 0 20px #8883;
+    width: 550px;
+    margin-left: -4rem;
+    padding: 3rem 7rem;
+
+}
+
+
+@media(min-width: 1500px) {
+
+    .login-image{
+        height: 650px;
+    }
+
+    #login-card #form-area{
+        height: 540px;
+        width: 600px;
+        padding: 4rem 7rem;
+    }
+
+}

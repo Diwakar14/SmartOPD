@@ -1,0 +1,31 @@
+<div class="alert">
+    <h3 mat-dialog-title>Charnock SmartOPD</h3>
+    <form #f="ngForm" (ngSubmit)="confirmDel(f)">
+        <mat-dialog-content class="mat-typography p-0">
+            <h4 *ngIf="!status">Are you sure you want to delete slot on {{slot.day}} ?</h4>
+            <br *ngIf="!status">
+
+            <h4 *ngIf="status">{{message}}</h4>
+            <div class="form-group" *ngIf="status">
+                <label for="">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="*****"
+                    [(ngModel)]="confirmDelete.password" required>
+            </div>
+            <!-- <p *ngIf="status">Do you want to proceed to delete? </p> -->
+            <br>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button class="btn" mat-dialog-close="true">Cancel</button>
+            <button (click)="confirm(200)" [disabled]="loading" *ngIf="!status" class="btn btn-theme-sm"
+                cdkFocusInitial>
+                Delete
+                <span class="ml-2" *ngIf="loading"><img src="../../../assets/icons/ring.svg" width="20px" alt=""></span>
+            </button>
+            <button (click)="confirm(206)" [disabled]="loading || (!f.valid)" class="btn btn-theme-sm" *ngIf="status"
+                cdkFocusInitial>
+                Delete
+                <span class="ml-2" *ngIf="loading"><img src="../../../assets/icons/ring.svg" width="20px" alt=""></span>
+            </button>
+        </mat-dialog-actions>
+    </form>
+</div>

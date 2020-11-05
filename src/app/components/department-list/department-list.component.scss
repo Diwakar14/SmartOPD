@@ -1,0 +1,154 @@
+.card{
+    border: unset;
+}
+.card .card-image{
+    height: 180px;
+    overflow: hidden;
+}
+.departments .heading{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(204, 204, 204, 0.5);
+
+}
+img{
+    transition: all ease .3s;
+}
+.departments .heading .primary{
+    font-size: 1.5rem;
+    padding-bottom: 0.4rem;
+    span{
+        margin-left: 1rem;
+        font-size: 0.8rem;
+        color: #687477;
+    }
+}
+.departments .heading .secondary{
+    display: flex;
+    margin-bottom: 1rem;
+}
+.blocker{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: #faffff;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.inputBox{
+    display: flex;
+    border-radius: 6px;
+    border: 1px solid #089eae;
+    overflow: hidden;
+    width: 20rem;
+    .search{
+        background: transparent;
+        outline: none;
+        border: none;
+        color: inherit;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .searchInput{
+        outline: none;
+        border: none;
+        font-size: 0.8rem;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        padding-left: 10px;
+        width: 100%;
+        background: transparent;
+    }
+    .searchInput:hover .inputBox{
+        width: 23rem;
+    }
+    .searchInput::placeholder{
+        font-size: 0.8rem;
+        color: #687477;
+    }
+}
+.departments{
+    padding: 0 1.5rem;
+    margin-bottom: 1.5rem;
+    
+    .action{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+        border-radius: 2rem 0 0 0rem;
+    }
+    .department-list{
+        position: relative;
+
+        .list{
+            display: grid;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            grid-template-columns: 1fr 1fr 1fr;
+            column-gap: 2.5rem;
+            row-gap: 2.5rem;
+        }
+        
+    
+        .card{
+            width: 100%;
+            border: 0px solid black;
+            padding: 0rem;
+            border-radius: 6px;
+            box-shadow: 0 0rem 0.8rem rgba(0, 0, 0, 0.09);
+            transition: all ease-in .3s;
+            margin-bottom: 0 !important;
+            overflow: hidden;
+            .card-heading{
+                padding: 1rem 1rem 0 1rem;
+                font-weight: 500;
+                font-size:1.5rem;
+
+            }
+            .title{
+                letter-spacing: 0.5px;
+            }
+            .count{
+                font-size: 0.9rem;
+            }
+
+            &:hover{
+                cursor: pointer;
+                box-shadow: 0 0rem 1.5rem rgba(0, 0, 0, 0.09);
+            }
+            &:hover .card-image img{
+                transform: scale(1.2);
+                transition: all ease .3s;
+
+            }
+            
+        }
+        
+    }
+}
+.card-body{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.card-body .team{
+    display: flex;
+    .doc{
+        width: 40px;
+        border-radius: 5rem;
+        overflow: hidden;
+    }
+}
+
+@media(min-width: 1500px){
+    .departments{
+        padding: 3rem 4rem;
+    }
+}

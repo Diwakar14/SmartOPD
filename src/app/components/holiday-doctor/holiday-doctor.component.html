@@ -1,0 +1,69 @@
+<div class="card p-0">
+  <div class="heading border-bottom mb-2 p-2">
+      <div class="logo">
+          <img src="../../../assets/icons/profile/HOLIDAY.png" alt="" width="100%">
+      </div>
+      <div class="card-title m-0">
+          Holidays
+      </div>
+  </div>
+    <form #f="ngForm" (ngSubmit)="createHolidays(f)" class="mt-0 p-3" *ngIf="role=='Admin'">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Start Date</label>
+                    <input type="date" [(ngModel)]="holidays.start_date" min="00:00" class="form-control" name="start_time" required />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">End Date</label>
+                    <input type="date"  [(ngModel)]="holidays.end_date" min="{{holidays.start_date}}"  class="form-control" name="end_time" required />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="full-width">
+                <mat-label>Slots</mat-label>
+                <mat-select name="slots" [(ngModel)]="holidays.slots" multiple>
+                  <mat-optgroup *ngFor="let day of slots" [label]="day.day">
+                    <mat-option *ngFor="let slot of day.online_slots" [value]="slot.id">
+                      <span class="pull-right text-success">{{slot.start_time}} to {{slot.end_time}} </span>
+                    </mat-option>
+                    <mat-option *ngFor="let slot of day.offline_slots" [value]="slot.id">
+                      {{slot.start_time}} to {{slot.end_time}}
+                    </mat-option>
+                  </mat-optgroup>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-theme-sm" *ngIf="docDeleted" [disabled]="!f.valid || disable">Submit</button>
+        </div>
+    </form>
+    <div class="p-3" style="position: relative;" >
+        <div class="blocker" [hidden]="!loading">
+            <img src="../../../assets/icons/ring.svg" width="40px" alt="img">
+        </div>
+        <p *ngIf="allholidays.length == 0" class="text-center text-light-b">No upcomming Holidays for this doctor</p>
+        <ul class="app-list">
+            <li class="app-list-item" *ngFor="let holiday of allholidays">
+              <div class="wrapper">
+                <div class="time">
+                  <span class="material-icons">event</span> &nbsp;
+                  <span class="text-light">{{holiday.start_date|date}} to  {{holiday.end_date|date}}</span>
+                </div>
+                <div class="slot mt-1">
+                  <div class="time " *ngFor="let slot of holiday.slots; index as i">
+                    <span class="material-icons">query_builder</span> &nbsp;
+                    {{slot.start_time}} to {{slot.end_time}}
+                  </div>
+                </div>
+              </div>
+              <div class="logo">
+                <!-- <span class="material-icons" style="cursor: pointer;" *ngIf="role=='Admin'" (click)="deleteHoliday(holiday)">clear</span> -->
+              </div>
+            </li>
+          </ul>
+    </div>
+</div>

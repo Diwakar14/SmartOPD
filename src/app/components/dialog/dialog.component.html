@@ -1,0 +1,14 @@
+<div class="createDept">
+  <h2 mat-dialog-title>Create New Department</h2>
+  <div mat-dialog-content>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Enter name of the Department</mat-label>
+      <input matInput [(ngModel)]="dept.name">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="dept.name" cdkFocusInitial>Create</button>
+  </div>
+</div>
+

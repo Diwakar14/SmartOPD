@@ -1,0 +1,136 @@
+
+.btn-theme{
+    font-size: 0.8rem;
+}
+h3{
+    line-height: normal;
+}
+input[type=time]{
+    font-size: 14px;
+}
+
+.sub{
+    margin-top: -1rem;
+}
+.card .heading{
+    display: flex;
+    // padding-bottom: 0.6rem;
+
+    .logo{
+        width: 30px;
+        height: 20px;
+        padding: 0.2rem;
+        margin-top: -6px;
+    }
+}
+.card-title{
+    margin-bottom: 0;
+}
+.form-check-label{
+    font-size: 1rem;
+}
+.checkbox-group{
+    display: flex;
+    justify-content: space-between;   
+    .days{
+        position: relative;
+        width: 5rem;
+        input[type=checkbox]{
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+        input[type=checkbox]:checked ~ .content{
+            background:#008389 ;
+            color: white;
+        }
+        .content{
+            border-radius: 2rem;
+            color: #091921;
+            width: 2.5rem;
+            display: flex;
+            height: 2.5rem;
+            text-align: center;
+            background: #daf0f2;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+    }
+    .days{
+        margin: 0.1rem;
+    }
+}
+.card-body {
+    padding: 0.25rem;
+}
+.wrapper{
+    display: flex;
+    padding: 0.5rem;
+    border-radius: 0.2rem;
+    margin-bottom: 0.5rem;
+    .logo{
+        width: 30px;
+        height: 30px;
+        padding: 0.2rem;
+        background: white;
+        border-radius: 6px;
+        margin-top: 2px;
+    }
+    .content{
+        margin-left: 0.5rem;
+        .heading{
+            color: #091921;
+            font-size: 0.8rem;
+        }
+        .sub-heading{
+            color: #545454;
+            font-size: 0.7rem;
+        }
+    }
+    .del{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+}
+
+.online{
+    background: #fff3f3;
+}
+.offline{
+    background: #eeffff;
+}
+
+#showSlots{
+    min-height: 150px;
+    max-height: 70vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.blocker{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width: 1500px){
+    .wrapper{
+        padding: 1rem;
+    }
+
+    #showSlots{
+        max-height: 50vh;
+    }
+}
