@@ -16,7 +16,7 @@ declare var Notiflix: any;
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  title = 'Charnock Hospital';
+  title = 'SmartOPD Hospital';
   loading;
   constructor(private router: Router) {
     this.loading = false;

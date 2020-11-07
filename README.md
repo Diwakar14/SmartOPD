@@ -1,6 +1,6 @@
-# Hmso
+# Demo SmartOPD
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
+This is a Demonstration version of SmartOPD Dashboard.
 
 ## Development server
 
