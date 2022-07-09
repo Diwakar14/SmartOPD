@@ -4,18 +4,18 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  { 
-    path: '', 
+  {
+    path: '',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule),
   },
-  { 
-    path: 'dashboard', 
+  {
+    path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule),
-    canActivate: [AuthGuard]  
+    canActivate: [AuthGuard]
   },
-  { 
-    path: 'faqs', 
-    loadChildren: () => import('./pages/faqs/faqs.module').then(m => m.FaqsModule) 
+  {
+    path: 'faqs',
+    loadChildren: () => import('./pages/faqs/faqs.module').then(m => m.FaqsModule)
   },
   { path: 'contacts', loadChildren: () => import('./pages/contact/contact.module').then(m => m.ContactModule) },
   { path: 'privacy', loadChildren: () => import('./pages/privacy/privacy.module').then(m => m.PrivacyModule) },
@@ -27,9 +27,9 @@ const routes: Routes = [
   { path: 'department', loadChildren: () => import('./pages/department/department.module').then(m => m.DepartmentModule) },
   { path: 'staff', loadChildren: () => import('./pages/staff/staff.module').then(m => m.StaffModule) },
   { path: 'notification', loadChildren: () => import('./pages/notification/notification.module').then(m => m.NotificationModule) },
-  
-  { 
-    path: '**', 
+
+  {
+    path: '**',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule),
   }
 ];

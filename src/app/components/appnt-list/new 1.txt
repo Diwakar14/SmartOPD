@@ -1,0 +1,9 @@
+/api/User/UpdateUser:
+
+Student:
+1. Need a field to set interested subject to test
+2. Need a field to set Current Class of student.
+
+Teacher:
+1. Need a field to set major subject for which it conducts tests.
+2. Need a field to set classes for which it conducts tests.

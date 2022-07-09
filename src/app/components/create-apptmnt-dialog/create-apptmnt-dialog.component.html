@@ -74,6 +74,16 @@
                     *ngIf="confirmBooking.consultation_type">{{confirmBooking.consultation_type==null?'-':confirmBooking.consultation_type|uppercase}}
                     CONSULTATION</span>
             </div>
+            <div class="consulation_type small-text mt-2">
+                <a href="{{confirmBooking.meeting.join_url}}" class="btn btn-theme-red btn-sm ml-2" target="_blank"
+                    *ngIf="confirmBooking.meeting && confirmBooking.status.status == 'Booked' && confirmBooking.consultation_type=='Online'">JOIN
+                    MEETING</a>
+                <button title="Copy Link" class="btn btn-theme-outline btn-sm ml-2"
+                    (click)="copyLink(confirmBooking.meeting.join_url)"
+                    *ngIf="confirmBooking.meeting && confirmBooking.status.status == 'Booked' && confirmBooking.consultation_type=='Online'">
+                    <span class="material-icons">share</span>
+                </button>
+            </div>
             <div class="appointment_date">
                 <div class="date right">
                     <div class="thumb"></div>

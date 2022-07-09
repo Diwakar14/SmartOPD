@@ -1,11 +1,9 @@
-<!-- <mat-progress-bar *ngIf="loading" color="accent" mode="indeterminate"></mat-progress-bar> -->
 <div class="dashboard" id="dashboard">
     <div class="sidebar" [class.sidebarCollaspe]="!sidebar">
-        <app-sidebar ></app-sidebar>
+        <app-sidebar></app-sidebar>
     </div>
     <div class="main" data-scrollbar>
         <app-toolbar></app-toolbar>
         <router-outlet></router-outlet>
     </div>
 </div>
-   

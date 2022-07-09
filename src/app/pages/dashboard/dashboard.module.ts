@@ -61,6 +61,8 @@ import { CancelAppointmentComponent } from 'src/app/components/cancel-appointmen
 import { ActivateDoctorDialogComponent } from 'src/app/components/activate-doctor-dialog/activate-doctor-dialog.component';
 import { InstantNotificationDialogComponent } from 'src/app/components/instant-notification-dialog/instant-notification-dialog.component';
 import { RecheduleAppDialogComponent } from 'src/app/components/rechedule-app-dialog/rechedule-app-dialog.component';
+import { CopyDialogComponent } from 'src/app/components/copy-dialog/copy-dialog.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 @NgModule({
@@ -104,7 +106,8 @@ import { RecheduleAppDialogComponent } from 'src/app/components/rechedule-app-di
     CancelAppointmentComponent,
     ActivateDoctorDialogComponent,
     InstantNotificationDialogComponent,
-    RecheduleAppDialogComponent
+    RecheduleAppDialogComponent,
+    CopyDialogComponent
   ],
   imports: [
     CommonModule,
@@ -124,7 +127,8 @@ import { RecheduleAppDialogComponent } from 'src/app/components/rechedule-app-di
       outerStrokeColor: "#78C000",
       innerStrokeColor: "#C7E596",
       animationDuration: 300,
-    })
+    }),
+    NgApexchartsModule
   ]
 })
 export class DashboardModule { }

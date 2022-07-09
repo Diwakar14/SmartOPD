@@ -9,8 +9,8 @@
     overflow-y: auto;
     width: 15rem;
     transition: all ease 0.2s;
-
 }
+
 .brand{
     padding-left: 1rem;
     margin-top: 1rem;
@@ -48,7 +48,6 @@
     background: white;
     border-top-right-radius: 1.5rem;
     border-bottom-right-radius: 1.5rem;
-    // box-shadow: 4px 0 16px #00d5e0;
     color:#005c66;
 }
 .side-navbar .list .list-item.active .head{
@@ -168,7 +167,7 @@
     margin-left: 2px;
     vertical-align: middle;
     border-top: 4px dashed;
-    border-top: 4px solid\9;
+    border-top: 4px solid;
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
 }

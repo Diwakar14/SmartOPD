@@ -25,22 +25,22 @@ export class LoginComponent implements OnInit, AfterViewInit {
   verifyOtpPanel = false;
 
   constructor(private authService: AuthService,
-    private cookie: CookieService, 
-    private router: Router) { 
+    private cookie: CookieService,
+    private router: Router) {
   }
   ngAfterViewInit(): void {
-    if((parseInt(localStorage.getItem('isUser')) == 0) 
-      && (this.cookie.get('auth_token') != null) 
-      && (this.cookie.get('auth_token') != undefined)){
+    if ((parseInt(localStorage.getItem('isUser')) == 0)
+      && (this.cookie.get('auth_token') != null)
+      && (this.cookie.get('auth_token') != undefined)) {
       this.router.navigateByUrl('/dashboard/home');
     }
   }
 
   ngOnInit(): void {
-    
+
   }
 
-  loginWithPhone(f: NgForm){
+  loginWithPhone(f: NgForm) {
     this.checking = true;
     this.authService.login(this.login).subscribe(
       (res: any) => {
@@ -55,43 +55,43 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   // structural function...
-  forgortPass(){
+  forgortPass() {
     this.forgotPassPanel = true;
   }
 
-  
-  requestOTP(){
+
+  requestOTP() {
     this.requestotpPanel = true;
   }
-  verifyOtp(){
+  verifyOtp() {
     this.verifyOtpPanel = true;
   }
 
-  new_password(){
+  new_password() {
     this.newPassPanel = true;
   }
 
-  loginWithEmail(f: NgForm){
+  loginWithEmail(f: NgForm) {
     this.submit = true;
     this.authService.loginWithEmail(this.login).subscribe(
       (res: any) => {
-          this.submit = false;
-          let auth_token = res.headers.get('authorization');
-          let expire = res.headers.get('expires');
+        this.submit = false;
+        let auth_token = res.headers.get('authorization');
+        let expire = res.headers.get('expires');
 
-          var now = new Date();
-          var time = now.getTime();
-          var expireTime = time + (parseInt(expire)*10);
-          now.setTime(expireTime);
-          
-          if(this.cookie.check('auth_token')){
-            this.cookie.deleteAll();
-          }
+        var now = new Date();
+        var time = now.getTime();
+        var expireTime = time + (parseInt(expire) * 1000);
+        now.setTime(expireTime);
 
-          this.cookie.set('auth_token', auth_token, now);
-          localStorage.setItem('isUser', '1');
-          Notiflix.Notify.Success("Logged in successfully.");
-          this.router.navigate(['/dashboard/home']);
+        if (this.cookie.check('auth_token')) {
+          this.cookie.deleteAll();
+        }
+
+        this.cookie.set('auth_token', auth_token, now);
+        localStorage.setItem('isUser', '1');
+        Notiflix.Notify.Success("Logged in successfully.");
+        this.router.navigate(['/dashboard/home']);
       },
       err => {
         Notiflix.Notify.Failure("Login failed.");

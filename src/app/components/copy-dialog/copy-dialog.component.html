@@ -1,0 +1,9 @@
+<div class="alert">
+    <h2 mat-dialog-title>Share</h2>
+    <mat-dialog-content class="mat-typography p-0">
+        <div class="wrp">
+            <input [(ngModel)]="copylink" type="text" #inputlink class="form-control">
+            <button class="btn btn-theme-sm btn-sm ml-2" type="submit" (click)="copy(inputlink)">Copy</button>
+        </div>
+    </mat-dialog-content>
+</div>

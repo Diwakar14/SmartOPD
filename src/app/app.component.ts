@@ -22,29 +22,29 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.loading = false;
   }
   ngAfterViewInit(): void {
-    this.router.events.subscribe((event: Event) => {
-      switch (true) {
-        case event instanceof NavigationStart: {
-          setTimeout(() => {
-            this.loading = true;
-          })
-          // this.loading = true;
-          break;
-        }
-        case event instanceof NavigationEnd:
-        case event instanceof NavigationCancel:
-        case event instanceof NavigationError: {
-          setTimeout(() => {
-            this.loading = false;
-          })
-          // this.loading = false;
-          break;
-        }
-        default: {
-          break;
-        }
-      }
-    });
+    // this.router.events.subscribe((event: Event) => {
+    //   switch (true) {
+    //     case event instanceof NavigationStart: {
+    //       setTimeout(() => {
+    //         this.loading = true;
+    //       })
+    //       // this.loading = true;
+    //       break;
+    //     }
+    //     case event instanceof NavigationEnd:
+    //     case event instanceof NavigationCancel:
+    //     case event instanceof NavigationError: {
+    //       setTimeout(() => {
+    //         this.loading = false;
+    //       })
+    //       // this.loading = false;
+    //       break;
+    //     }
+    //     default: {
+    //       break;
+    //     }
+    //   }
+    // });
   }
   ngOnInit(): void {
 

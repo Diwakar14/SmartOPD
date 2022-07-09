@@ -1,0 +1,181 @@
+body{
+    background: #fcfcff;
+    font-family: 'Mukta', sans-serif;
+    color: #666;
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Maven Pro', sans-serif;
+    color: #1e2432;
+}
+
+.navbar{
+    padding: 0.8rem 1.5rem;
+    background: #ffffff !important;
+    box-shadow: 0 0 20px #e0e0e5;
+}
+#navbar-logo{
+    margin-right: 2.5rem;
+    height: 2.75rem;
+}
+.navbar-brand{
+    font-family: 'Maven Pro', sans-serif;
+    font-weight: 700;
+    color: #ffa500 !important;
+    font-size: 1.5rem;
+}
+.navbar-nav .nav-item{
+    margin-right: 1rem;
+}
+
+.navbar-nav .nav-link{
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.15rem;
+    font-weight: 500;
+    color: #9e9fa1 !important;
+}
+
+.navbar-nav .nav-link:hover,.navbar-nav .nav-item.active .nav-link{
+    color: #0b1845 !important;
+}
+
+.bg-theme{
+    background: #ffae00;
+}
+
+.side-navbar-toggle{
+    margin-right: 1rem;
+}
+
+#wrapper{
+    padding-top: 4rem;
+}
+#side-bar{
+    padding-top: 2rem;
+    height: 100vh;
+    overflow-y: scroll;
+    position: fixed;
+    background: white;
+    box-shadow: 0 0 20px #e0e0e588;
+    -ms-overflow-style: none;  /* IE and Edge */
+    transition: all ease 0.2s;
+}
+
+#side-bar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#side-bar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+#side-bar:hover{
+    -ms-overflow-style: auto;
+    scrollbar-width: 1px;
+}
+
+#side-bar ul{
+    list-style: none;
+    padding-left: 0;
+}
+
+#side-bar ul li a{
+    display: flex;
+    align-items: center ;
+    margin: 0.8rem 0;
+    padding: 1rem 2rem;
+    transition: all ease-in 0.3s;
+    color: #b8bccd;
+}
+
+#side-bar ul li a:hover{
+    cursor: pointer;
+    background: linear-gradient(to right, rgba(185, 185, 255, 0.5),rgba(255,255,255,1),rgba(255,255,255,1));
+    transition: all ease-in 0.3s;
+    color: #4d566c;
+}
+
+#side-bar ul li a i{
+
+    font-size: 1.5rem;
+    text-align: center;
+    width: 2rem;
+}
+
+#side-bar ul li a label{
+    margin-left: 1.5rem;
+    margin-bottom: 0;
+
+}
+
+#side-bar.side-bar-collapsed ul li a label{
+    display: none;
+}
+
+
+#content{
+    margin-left: 14rem;
+    padding-top: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    transition: all ease 0.2s;
+}
+
+#content.content-collapse{
+    margin-left: 6rem;
+}
+
+
+#page-header{
+    display: flex;
+    align-items: baseline;
+    border-bottom: 2px double #eceeef;
+}
+#page-header h1{
+    font-size: 2rem;
+}
+#page-header .breadcrumb{
+
+    background: transparent;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    margin: 0;
+    margin-left: 1rem;
+}
+#page-header .breadcrumb-item a{
+    color: #a16c04;
+}
+#page-header .breadcrumb-item{
+    color: orange;
+}
+
+#page-content{
+    margin-top: 1rem;
+}
+#page-content .card{
+    padding: 1rem;
+    border: none;
+    box-shadow: 0 0 20px rgba(224, 224, 229, 0.5);
+    margin-bottom: 1rem;
+
+}
+#page-content .card-none{
+    padding: 1rem;
+}
+
+#page-content h5{
+    letter-spacing: 0.05rem;
+    font-family: 'Mukta', sans-serif;
+    font-weight: 500;
+}
+
+/*Big Screeen CSS*/
+@media(min-width: 1500px) {
+    #content{
+        height: 200px;
+        padding-top: 2rem;
+    }
+}
